@@ -1,0 +1,95 @@
+{
+  extends: [
+    "eslint:all",                       // List of rules: https://eslint.org/docs/rules
+    "plugin:react/all",                 // List of rules: https://github.com/yannickcr/eslint-plugin-react#list-of-supported-rules
+    "plugin:jsx-a11y/strict"            // List of rules: https://github.com/evcohen/eslint-plugin-jsx-a11y#supported-rules
+  ],
+  env: {
+    browser: true,
+    node: true
+  },
+  parser: "babel-eslint",
+  parserOptions: {
+    sourceType: "module",
+    ecmaFeatures: {
+      jsx: true,
+      impliedStrict: true
+    }
+  },
+  plugins: [
+    "react",
+    "jsx-a11y"
+  ],
+  settings: {
+    react: {
+      version: '16.10.2'
+    }
+  },
+  rules: {
+    arrow-body-style:                       "off",
+    brace-style:                            ["error", "stroustrup", { allowSingleLine: true }],
+    capitalized-comments:                   "warn",
+    comma-dangle:                           ["warn", "never"],
+    consistent-this:                        "off",
+    default-case:                           ["warn", { "commentPattern": "^eslint\\sskip\\sdefault" }],
+    eqeqeq:                                 ["error", "smart"],
+    func-style:                             ["error", "declaration", { allowArrowFunctions: true }],
+    function-call-argument-newline:         "off",
+    id-length:                              "off",
+    indent:                                 ["error", 2, { "SwitchCase": 1 }],
+    init-declarations:                      "off",
+    key-spacing:                            ["error", { "mode": "minimum" }],
+    max-len:                                ["warn", 150, { comments: 80, ignoreTrailingComments: true, ignoreUrls: true }],
+    max-statements-per-line:                "off",
+    max-statements:                         "off",
+    multiline-ternary:                      "off",
+    no-continue:                            "off",
+    no-extra-parens:                        "warn",
+    no-inline-comments:                     "warn",
+    no-magic-numbers:                       ["warn", { "ignore": [-1, 0, 1] }],
+    no-plusplus:                            ["warn", { "allowForLoopAfterthoughts": true }],
+    no-ternary:                             "off",
+    object-curly-spacing:                   ["error", "always"],
+    object-property-newline:                ["error", { "allowAllPropertiesOnSameLine": true }],
+    object-shorthand:                       "off",
+    one-var:                                "off",
+    padded-blocks:                          ["error", { blocks: "never", classes: "always", switches: "never" }, { allowSingleLineBlocks: true }],
+    prefer-arrow-callback:                  "warn",
+    prefer-destructuring:                   "off",
+    quote-props:                            ["error", "consistent"],
+    quotes:                                 ["warn", "single"],
+    react/destructuring-assignment:         ["warn", "never"],
+    react/forbid-prop-types:                "off",
+    react/jsx-closing-bracket-location:     ["warn", "after-props"],
+    react/jsx-filename-extension:           "warn",
+    react/jsx-handler-names:                "off",
+    react/jsx-indent-props:                 ["warn", 2],
+    react/jsx-indent:                       ["warn", 2],
+    react/jsx-max-props-per-line:           "off",
+    react/jsx-no-bind:                      ["error", { allowArrowFunctions: true }],
+    react/jsx-no-literals:                  "off",
+    react/jsx-one-expression-per-line:      "off",
+    react/jsx-sort-props:                   "off",
+    react/no-set-state:                     "off",
+    react/require-default-props:            "off",
+    react/require-optimization:             "off",
+    react/sort-prop-types:                  "off",
+    semi:                                   ["error", "always"],
+    sort-imports:                           ["warn", { ignoreCase: true }],
+    sort-keys:                              "off",
+    space-before-function-paren:            ["error", "never"],
+    space-in-parens:                        ["warn", "never"],
+
+  },
+  overrides: [
+    {
+      files: [
+        "**/*.spec.js",
+        "**/*.spec.jsx"
+      ],
+      env: {
+        jest: true
+      }
+    }
+  ]
+}

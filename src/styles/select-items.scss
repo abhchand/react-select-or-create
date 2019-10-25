@@ -1,0 +1,45 @@
+.react-select-or-create .select-items {
+  display: inline-block;
+  width: 100%;
+  min-height: $rcs_select_items_height;
+  max-height: $rcs_select_items_height;
+  padding: 10px 0;
+  overflow: auto;
+
+  .empty-state {
+    margin-left: 15px;
+  }
+
+  li {
+    height: 30px;
+    padding-left: 15px;
+    text-align: left;
+
+    &.selected {
+      background-color: gray;
+    }
+
+    &:hover {
+      background-color: gray;
+    }
+
+    & > div {
+      display: flex;
+      flex-flow: row nowrap;
+      align-items: center;
+      justify-content: flex-start;
+      height: 100%;
+    }
+
+    span.highlight {
+      background-color: yellow;
+    }
+
+    & > span {
+      width: 170px;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+    }
+  }
+}

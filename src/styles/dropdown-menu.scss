@@ -1,0 +1,9 @@
+.react-select-or-create .dropdown-menu {
+  position: absolute;
+  z-index: 99;
+  width: $rcs_width;
+  overflow: hidden;
+  color: black;
+  background-color: white;
+  border: 1px solid black;
+}

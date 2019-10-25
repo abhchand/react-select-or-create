@@ -1,0 +1,138 @@
+var path = require('path');
+
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const webpack = require('webpack');
+
+var DEMO_DIR = path.resolve(__dirname, 'demo');
+var DIST_DIR = path.resolve(__dirname, 'dist');
+var EXAMPLE_DIR = path.resolve(__dirname, 'examples');
+var ROOT_DIR = path.resolve(__dirname);
+var SRC_DIR = path.resolve(__dirname, 'src');
+
+var config = {
+  mode: process.env.NODE_ENV,
+  resolve: {
+    extensions: ['.js', '.jsx', '.sass', '.scss', '.css'],
+    modules: [
+      SRC_DIR + '/styles',
+      SRC_DIR + '/js',
+      'node_modules'
+    ]
+  },
+  resolveLoader: {
+    modules: ['node_modules']
+  },
+  module: {
+    strictExportPresence: true,
+    rules: [
+      {
+        test: /\.css$/,
+        use: [
+          {
+            loader: MiniCssExtractPlugin.loader,
+            options: { hmr: process.env.NODE_ENV == 'development' },
+          },
+          'css-loader',
+        ],
+      },
+      {
+        test: /\.(sass|scss)$/,
+        use: [
+          {
+            loader: MiniCssExtractPlugin.loader,
+            options: { hmr: process.env.NODE_ENV == 'development' },
+          },
+          'css-loader',
+          'sass-loader'
+        ],
+      },
+      {
+        test: /\.(js|jsx)$/,
+        exclude: /node_modules/,
+        use: [
+          'babel-loader',
+          'eslint-loader'
+        ]
+      }
+    ]
+  },
+  plugins: [
+    new webpack.HotModuleReplacementPlugin()
+  ]
+};
+
+var componentConfig = Object.assign({}, config, {
+  entry: [
+    SRC_DIR + '/js/react-select-or-create.jsx',
+    SRC_DIR + '/styles/main.scss'
+  ],
+  output: {
+    path: DIST_DIR,
+    filename: 'index.js'
+  },
+  plugins: [
+    new MiniCssExtractPlugin()
+  ]
+});
+
+var exampleConfig = Object.assign({}, config, {
+  entry: [
+    EXAMPLE_DIR + '/index.jsx',
+    SRC_DIR + '/styles/main.scss'
+  ],
+  output: {
+    path: DEMO_DIR + '/index',
+    filename: 'index.js'
+  },
+  plugins: [
+    new MiniCssExtractPlugin(),
+    new HtmlWebpackPlugin({
+      hash: true,
+      filename: 'index.html',
+      template: './examples/template.html'
+    })
+  ]
+});
+
+// DEVELOPMENT////////////////////////////////////////////
+//
+
+if (config.mode == 'development') {
+
+  // Use the 'example' for convenient development
+  exampleConfig.devServer = {
+    contentBase: EXAMPLE_DIR + '/index',
+    disableHostCheck: true,
+    headers: {
+      'Access-Control-Allow-Origin': '*'
+    },
+    host: 'localhost',
+    hot: true,
+    overlay: true,
+    port: 3035,
+    quiet: false,
+    stats: {
+      errorDetails: true
+    },
+    useLocalIp: false,
+    watchOptions: {
+      ignored: '/node_modules/'
+    }
+  }
+
+  exampleConfig.output.publicPath = '/';
+}
+
+// ///////////////////////////////////////////////////////
+
+module.exports = [
+  // Order matters! From the docs:
+  //
+  //  > When exporting multiple configurations only the `devServer`
+  //  > options for the first configuration will be taken into
+  //  > account and used for all the configurations in the array.
+  //
+  exampleConfig,
+  componentConfig
+];

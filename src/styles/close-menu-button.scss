@@ -1,0 +1,13 @@
+.react-select-or-create .close-menu-btn {
+  position: relative;
+  width: $rcs_width;
+  height: $rcs_btn_height;
+  text-align: center;
+  background-color: lightgray;
+  border: 1px solid black;
+
+  span {
+    line-height: $rcs_btn_height;
+    vertical-align: middle;
+  }
+}

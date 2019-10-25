@@ -1,0 +1,41 @@
+{
+  presets: [
+    [
+      '@babel/preset-env',
+      {
+        modules: false,
+        forceAllTransforms: true,
+        targets: {
+          browsers: '> 1%'
+        },
+        // Combination of the below 2 options will make core-js
+        // import only what's needed to meet the target browsers
+        // listed above. This avoids pulling in all core-js polyfills
+        // at once.
+        // See: https://github.com/zloirock/core-js/blob/0f997e25e8d749b8bf3f6369b2c6c603b4211525/docs/2019-03-19-core-js-3-babel-and-a-look-into-the-future.md#usebuiltins-entry-with-corejs-3
+        useBuiltIns: 'usage',
+        corejs: 3
+      }
+    ],
+    '@babel/preset-react'
+  ],
+  plugins: [
+    [
+      'module-resolver', { root: ['./src/js'] }
+    ],
+    '@babel/plugin-proposal-class-properties'
+  ],
+
+  // Environment Specific
+  env: {
+    test: {
+      plugins: [
+        // Jest runs in node which only supports CommonJS modules
+        // Need to transform ES modules into CommonJS modules for
+        // test environment.
+        // See: https://jestjs.io/docs/en/webpack.html#using-with-webpack-2
+        '@babel/plugin-transform-modules-commonjs'
+      ]
+    }
+  }
+}
