@@ -1,6 +1,6 @@
 import React from 'react';
-import ReactSelectOrCreate from '../src/js/react-select-or-create';
 import ReactDom from 'react-dom';
+import ReactSelectOrCreate from '../src/js/react-select-or-create';
 
 const items = [
   { id: 'AP', name: 'Andhra Pradesh' },
