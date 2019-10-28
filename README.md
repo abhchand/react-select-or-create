@@ -2,7 +2,7 @@ A customizable select-or-create dropdown for ReactJS
 
 <img src="meta/demo.gif" width="300" />
 
-You can [view a live demo here](https://abhchand.me)
+You can [view a live demo here](https://abhchand.me/demos/react-select-or-create)
 
 ### Features
 
