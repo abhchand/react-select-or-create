@@ -19,7 +19,7 @@ Install the package:
 yarn install react-select-or-create
 ```
 
-Then, in your component:
+In your React component:
 
 ```js
 import ReactSelectOrCreate from 'react-select-or-create';
@@ -30,9 +30,7 @@ const countries = [
   { id: 'NL', name: 'Netherlands' }
 ];
 
-const onSelectHandler = (itemId) => {
-  alert(`Item id '${itemId}' was clicked on!`);
-};
+const onSelectHandler = (itemId) => { alert(`Item '${itemId}' clicked!`); };
 
 const onCreateHandler = (itemName, prevItems) => {
   const id = `id-${new Date().getTime()}`;
@@ -43,17 +41,19 @@ const onCreateHandler = (itemName, prevItems) => {
   return newItems;
 };
 
-<ReactSelectOrCreate
-  items={countries}
-  onSelect={onSelectHandler}
-  onCreate={onCreateHandler} />
+<ReactSelectOrCreate items={countries} onSelect={onSelectHandler} onCreate={onCreateHandler} />
 ```
 
+The component also ships with minimal styling that you can import and override as needed:
+
+```scss
+@import "react-select-or-create/dist/main.css";
+```
 
 # Props
 
 
-#### `items` (required)
+### `items` (required)
 
 A list of items to be displayed in the dropdown list
 
@@ -66,14 +66,14 @@ A list of items to be displayed in the dropdown list
 ]
 ```
 
-#### `onSelect` (required)
+### `onSelect` (required)
 
 A function to be called when an item is selected
 
 **type**: `{Function(String itemId, String itemName)}`
 
 
-#### `onCreate` (required)
+### `onCreate` (required)
 
 A function to be called when a new item is created
 
@@ -81,7 +81,7 @@ A function to be called when a new item is created
 
 This function must return a new list of items to be displayed. It is up to you to determine if and how the new item is inserted into the list of previous items, and how to generate a new unique id.
 
-#### `textForOpenMenuButton`
+### `textForOpenMenuButton`
 
 Text to be displayed in the "open" button
 
@@ -93,7 +93,7 @@ If a `String` is provided it will be automatically wrapped in a `<span>` tag.
 
 If a `Function` is provided, it will be called and can return any desired content, from a simple string to JSX.
 
-#### `textForCloseMenuButton`
+### `textForCloseMenuButton`
 
 Text to be displayed in the "close" button
 
@@ -105,7 +105,7 @@ If a `String` is provided it will be automatically wrapped in a `<span>` tag.
 
 If a `Function` is provided, it will be called and can return any desired content, from a simple string to JSX.
 
-#### `textForItemsEmptyState`
+### `textForItemsEmptyState`
 
 Text to be displayed when there are no items to be displayed
 
@@ -113,7 +113,7 @@ Text to be displayed when there are no items to be displayed
 
 **default**: `'No Results'`
 
-#### `textForSearchInputPlaceholder`
+### `textForSearchInputPlaceholder`
 
 Text to be displayed as the search input field `placeholder`
 
@@ -122,7 +122,7 @@ Text to be displayed as the search input field `placeholder`
 **default**: `'Search...'`
 
 
-#### `textForCreateItem`
+### `textForCreateItem`
 
 Text to display in the create item section
 
@@ -152,7 +152,7 @@ This will open `http://localhost:3035` in a browser window. Any changes made to 
 
 - If you have an issue or feature request, please [open an issue here](https://github.com/abhchand/react-select-or-create/issues/new).
 
-- Contribution is encouraged! Please open an issue to suggest a new feature and confirm that it will be accepted before filing a pull request.
+- Contribution is encouraged! But please open an issue first to suggest a new feature and confirm that it will be accepted before filing a pull request.
 
 # Changelog
 
