@@ -68,9 +68,11 @@ A list of items to be displayed in the dropdown list
 
 ### `onSelect` (required)
 
-A function to be called when an item is selected
+A function to be called when an item is selected.
 
 **type**: `{Function(String itemId, String itemName)}`
+
+The function will receive the id and name of the clicked item as arguments.
 
 
 ### `onCreate` (required)
@@ -79,7 +81,9 @@ A function to be called when a new item is created
 
 **type**: `{Function(String itemName, Array prevItems)}`
 
-This function must return a new list of items to be displayed. It is up to you to determine if and how the new item is inserted into the list of previous items, and how to generate a new unique id.
+The function will receive the name of the new item and the list of previous items as arguments.
+
+This function must return a **new list of items** to be displayed. It is up to you to determine how (if at all) the new item is inserted into the list of previous items, and how to generate a new unique id.
 
 ### `textForOpenMenuButton`
 
