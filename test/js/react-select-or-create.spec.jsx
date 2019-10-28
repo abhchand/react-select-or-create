@@ -1,7 +1,7 @@
-import { cleanup, fireEvent, render } from "@testing-library/react";
-import ReactSelectOrCreate from "react-select-or-create";
-import KeyCodes from "utils/key-codes";
-import React from "react";
+import { cleanup, fireEvent, render } from '@testing-library/react';
+import KeyCodes from 'utils/key-codes';
+import React from 'react';
+import ReactSelectOrCreate from 'react-select-or-create';
 
 let rendered;
 
@@ -11,9 +11,9 @@ let onSelect;
 
 beforeEach(() => {
   items = [
-    { id: "TN", name: "Tamil Nadu" },
-    { id: "MH", name: "Maharashtra" },
-    { id: "KL", name: "Kerala" }
+    { id: 'TN', name: 'Tamil Nadu' },
+    { id: 'MH', name: 'Maharashtra' },
+    { id: 'KL', name: 'Kerala' }
   ];
 
   onCreate = jest.fn();
@@ -22,8 +22,8 @@ beforeEach(() => {
 
 afterEach(cleanup);
 
-describe("<ReactSelectOrCreate />", () => {
-  it("renders the component with menu closed", () => {
+describe('<ReactSelectOrCreate />', () => {
+  it('renders the component with menu closed', () => {
     rendered = renderComponent();
 
     const component = rendered.container;
@@ -33,8 +33,8 @@ describe("<ReactSelectOrCreate />", () => {
     expect(component).not.toContainElement(getElementDropdownMenu());
   });
 
-  describe("opening the dropdown menu", () => {
-    it("user can open menu onClick", () => {
+  describe('opening the dropdown menu', () => {
+    it('user can open menu onClick', () => {
       rendered = renderComponent();
 
       clickOpenMenuButton();
@@ -45,7 +45,7 @@ describe("<ReactSelectOrCreate />", () => {
       expect(component).toContainElement(getElementDropdownMenu());
     });
 
-    it("user can open menu onKeyPress Enter", () => {
+    it('user can open menu onKeyPress Enter', () => {
       rendered = renderComponent();
 
       fireEvent.keyPress(getElementOpenMenuButton(), KeyCodes.ENTER);
@@ -57,8 +57,8 @@ describe("<ReactSelectOrCreate />", () => {
     });
   });
 
-  describe("closing the dropdown menu", () => {
-    it("user can open menu onClick", () => {
+  describe('closing the dropdown menu', () => {
+    it('user can open menu onClick', () => {
       rendered = renderComponent();
 
       clickOpenMenuButton();
@@ -71,7 +71,7 @@ describe("<ReactSelectOrCreate />", () => {
       expect(component).not.toContainElement(getElementDropdownMenu());
     });
 
-    it("user can close menu onKeyPress Enter", () => {
+    it('user can close menu onKeyPress Enter', () => {
       rendered = renderComponent();
 
       clickOpenMenuButton();
@@ -85,18 +85,21 @@ describe("<ReactSelectOrCreate />", () => {
     });
   });
 
-  it("user can search and filter items", () => {
+  it('user can search and filter items', () => {
     rendered = renderComponent();
 
     clickOpenMenuButton();
-    searchFor("ra");
+    searchFor('ra');
 
-    expect(getElementSearchInput().value).toBe("ra");
-    expect(displayedItems()).toMatchObject([{ id: "MH", name: "Maharashtra" }, { id: "KL", name: "Kerala" }]);
+    expect(getElementSearchInput().value).toBe('ra');
+    expect(displayedItems()).toMatchObject([
+      { id: 'MH', name: 'Maharashtra' },
+      { id: 'KL', name: 'Kerala' }
+    ]);
   });
 
-  describe.only("selecting items", () => {
-    it("user can select an item onClick", () => {
+  describe.only('selecting items', () => {
+    it('user can select an item onClick', () => {
       rendered = renderComponent();
 
       clickOpenMenuButton();
@@ -104,14 +107,17 @@ describe("<ReactSelectOrCreate />", () => {
       expect(onSelect).not.toHaveBeenCalled();
       expect(onCreate).not.toHaveBeenCalled();
 
-      fireEvent.click(getItem("MH"));
+      fireEvent.click(getItem('MH'));
 
       expect(onSelect).toHaveBeenCalled();
-      expect(onSelect.mock.calls[0]).toMatchObject(["MH", "Maharashtra"]);
+      expect(onSelect.mock.calls[0]).toMatchObject([
+        'MH',
+        'Maharashtra'
+      ]);
       expect(onCreate).not.toHaveBeenCalled();
     });
 
-    it("user can select an item onKeyDown Enter", () => {
+    it('user can select an item onKeyDown Enter', () => {
       rendered = renderComponent();
 
       clickOpenMenuButton();
@@ -123,13 +129,16 @@ describe("<ReactSelectOrCreate />", () => {
       fireEvent.keyDown(getElementSearchInput(), KeyCodes.ENTER);
 
       expect(onSelect).toHaveBeenCalled();
-      expect(onSelect.mock.calls[0]).toMatchObject(["MH", "Maharashtra"]);
+      expect(onSelect.mock.calls[0]).toMatchObject([
+        'MH',
+        'Maharashtra'
+      ]);
       expect(onCreate).not.toHaveBeenCalled();
     });
   });
 
-  describe("create new item", () => {
-    it("user can create a new item onClick", () => {
+  describe('create new item', () => {
+    it('user can create a new item onClick', () => {
       rendered = renderComponent();
 
       clickOpenMenuButton();
@@ -137,15 +146,18 @@ describe("<ReactSelectOrCreate />", () => {
       expect(onSelect).not.toHaveBeenCalled();
       expect(onCreate).not.toHaveBeenCalled();
 
-      searchFor("abcde");
+      searchFor('abcde');
       fireEvent.click(getElementCreateItem());
 
       expect(onSelect).not.toHaveBeenCalled();
       expect(onCreate).toHaveBeenCalled();
-      expect(onCreate.mock.calls[0]).toMatchObject(["abcde", items]);
+      expect(onCreate.mock.calls[0]).toMatchObject([
+        'abcde',
+        items
+      ]);
     });
 
-    it("user can create a new item onKeyDown Enter", () => {
+    it('user can create a new item onKeyDown Enter', () => {
       rendered = renderComponent();
 
       clickOpenMenuButton();
@@ -153,81 +165,84 @@ describe("<ReactSelectOrCreate />", () => {
       expect(onSelect).not.toHaveBeenCalled();
       expect(onCreate).not.toHaveBeenCalled();
 
-      searchFor("abcde");
+      searchFor('abcde');
       fireEvent.keyDown(getElementCreateItem(), KeyCodes.ENTER);
 
       expect(onSelect).not.toHaveBeenCalled();
       expect(onCreate).toHaveBeenCalled();
-      expect(onCreate.mock.calls[0]).toMatchObject(["abcde", items]);
+      expect(onCreate.mock.calls[0]).toMatchObject([
+        'abcde',
+        items
+      ]);
     });
   });
 
-  describe("text props", () => {
-    it("overrides the default text props when present", () => {
+  describe('text props', () => {
+    it('overrides the default text props when present', () => {
       rendered = renderComponent({
-        textForCloseMenuButton: "foo close",
-        textForItemsEmptyState: "foo empty",
-        textForSearchInputPlaceholder: "foo search",
-        textForCreateItem: ((text) => (`foo ${text}`))
+        textForCloseMenuButton: 'foo close',
+        textForItemsEmptyState: 'foo empty',
+        textForSearchInputPlaceholder: 'foo search',
+        textForCreateItem: (text) => `foo ${text}`
       });
 
       clickOpenMenuButton();
 
-      // textForCloseMenuButton
-      expect(getElementCloseMenuButton()).toHaveTextContent("foo close");
+      // TextForCloseMenuButton
+      expect(getElementCloseMenuButton()).toHaveTextContent('foo close');
 
-      // textForSearchInputPlaceholder
-      expect(getElementSearchInput()).toHaveAttribute("placeholder", "foo search");
+      // TextForSearchInputPlaceholder
+      expect(getElementSearchInput()).toHaveAttribute('placeholder', 'foo search');
 
-      // textForItemsEmptyState
-      searchFor("zzzz");
-      expect(getElementSelectItems()).toHaveTextContent("foo empty");
+      // TextForItemsEmptyState
+      searchFor('zzzz');
+      expect(getElementSelectItems()).toHaveTextContent('foo empty');
 
-      // textForCreateItem
-      expect(getElementCreateItem()).toHaveTextContent("foo zzzz");
+      // TextForCreateItem
+      expect(getElementCreateItem()).toHaveTextContent('foo zzzz');
     });
   });
 });
 
-const getElementOpenMenuButton = () => (rendered.queryByTestId("open-menu-button"));
-const getElementCloseMenuButton = () => (rendered.queryByTestId("close-menu-button"));
-const getElementDropdownMenu = () => (rendered.queryByTestId("dropdown-menu"));
-const getElementSearchInput = () => (rendered.getByTestId("search-input").querySelector("input"));
-const getElementCreateItem = () => (rendered.getByTestId("create-item"));
-const getElementSelectItems = () => (rendered.getByTestId("select-items"));
+const getElementOpenMenuButton = () => rendered.queryByTestId('open-menu-button');
+const getElementCloseMenuButton = () => rendered.queryByTestId('close-menu-button');
+const getElementDropdownMenu = () => rendered.queryByTestId('dropdown-menu');
+const getElementSearchInput = () => rendered.getByTestId('search-input').querySelector('input');
+const getElementCreateItem = () => rendered.getByTestId('create-item');
+const getElementSelectItems = () => rendered.getByTestId('select-items');
 
-const clickOpenMenuButton = () => (fireEvent.click(getElementOpenMenuButton()));
-const clickCloseMenuButton = () => (fireEvent.click(getElementCloseMenuButton()));
+const clickOpenMenuButton = () => fireEvent.click(getElementOpenMenuButton());
+const clickCloseMenuButton = () => fireEvent.click(getElementCloseMenuButton());
 
 // eslint-disable-next-line no-unused-vars
 const pressArrowUpOnSearchInput = () => {
-  let searchInput = getElementSearchInput();
+  const searchInput = getElementSearchInput();
   return fireEvent.keyDown(searchInput, KeyCodes.ARROW_UP);
 };
 
 const pressArrowDownOnSearchInpupt = () => {
-  let searchInput = getElementSearchInput();
+  const searchInput = getElementSearchInput();
   return fireEvent.keyDown(searchInput, KeyCodes.ARROW_DOWN);
 };
 
-const getItem = (itemId) => (rendered.getByTestId("select-items").querySelector(`li[data-id="${itemId}"] div`));
-const searchFor = (query) => (fireEvent.change(getElementSearchInput(), { target: { value: query } }));
+const getItem = (itemId) => rendered.getByTestId('select-items').querySelector(`li[data-id="${itemId}"] div`);
+const searchFor = (query) => fireEvent.change(getElementSearchInput(), { target: { value: query } });
 
 
 const displayedItems = () => {
-  let displayedItems = [];
-  let selectItems = getElementSelectItems();
+  const displayedItemsList = [];
+  const selectItems = getElementSelectItems();
 
-  selectItems.querySelectorAll("li").forEach((item) => {
-    displayedItems.push({ id: item.dataset.id, name: item.textContent });
+  selectItems.querySelectorAll('li').forEach((item) => {
+    displayedItemsList.push({ id: item.dataset.id, name: item.textContent });
   });
 
-  return displayedItems;
+  return displayedItemsList;
 };
 
 const renderComponent = (additionalProps = {}) => {
   const fixedProps = { items: items, onCreate: onCreate, onSelect: onSelect };
-  const props = {...fixedProps, ...additionalProps };
+  const props = { ...fixedProps, ...additionalProps };
 
   return render(<ReactSelectOrCreate {...props} />);
 };

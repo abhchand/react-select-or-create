@@ -1,7 +1,7 @@
-import { cleanup, fireEvent, render } from "@testing-library/react";
-import KeyCodes from "utils/key-codes";
-import React from "react";
-import SearchInput from "search-input";
+import { cleanup, fireEvent, render } from '@testing-library/react';
+import KeyCodes from 'utils/key-codes';
+import React from 'react';
+import SearchInput from 'search-input';
 
 let rendered;
 
@@ -18,9 +18,9 @@ const defaults = SearchInput.defaultProps;
 
 beforeEach(() => {
   items = [
-    { id: "TN", name: "Tamil Nadu" },
-    { id: "MH", name: "Maharashtra" },
-    { id: "KL", name: "Kerala" }
+    { id: 'TN', name: 'Tamil Nadu' },
+    { id: 'MH', name: 'Maharashtra' },
+    { id: 'KL', name: 'Kerala' }
   ];
 
   filteredItems = items;
@@ -35,31 +35,34 @@ beforeEach(() => {
 
 afterEach(cleanup);
 
-describe("<SearchInput />", () => {
-  it("renders the component", () => {
+describe('<SearchInput />', () => {
+  it('renders the component', () => {
     rendered = renderComponent();
 
     const input = getElementInput();
 
     expect(input).not.toBeNull();
-    expect(input).toHaveAttribute("placeholder", defaults.placeholder);
+    expect(input).toHaveAttribute('placeholder', defaults.placeholder);
   });
 
-  describe("placeholder prop", () => {
-    it("overrides the default placeholder when present", () => {
-      rendered = renderComponent({ placeholder: "foo" });
+  describe('placeholder prop', () => {
+    it('overrides the default placeholder when present', () => {
+      rendered = renderComponent({ placeholder: 'foo' });
 
       const input = getElementInput();
 
       expect(input).not.toBeNull();
-      expect(input).toHaveAttribute("placeholder", "foo");
+      expect(input).toHaveAttribute('placeholder', 'foo');
     });
   });
 
-  describe("input keyDown event", () => {
-    it("calls the appropriate *keyDown handler", () => {
-      const filteredItems = [{ id: "TN", name: "Tamil Nadu" }, { id: "KL", name: "Kerala" }];
-      const currentSelectedItemIndex = 1;
+  describe('input keyDown event', () => {
+    it('calls the appropriate *keyDown handler', () => {
+      filteredItems = [
+        { id: 'TN', name: 'Tamil Nadu' },
+        { id: 'KL', name: 'Kerala' }
+      ];
+      currentSelectedItemIndex = 1;
 
       rendered = renderComponent({
         filteredItems: filteredItems,
@@ -72,7 +75,7 @@ describe("<SearchInput />", () => {
       expect(onKeyEnter).not.toHaveBeenCalled();
       fireEvent.keyDown(input, KeyCodes.ENTER);
       expect(onKeyEnter).toHaveBeenCalled();
-      expect(onKeyEnter.mock.calls[0]).toMatchObject(["KL"]);
+      expect(onKeyEnter.mock.calls[0]).toMatchObject(['KL']);
 
       // Escape Key
       expect(onKeyEscape).not.toHaveBeenCalled();
@@ -91,92 +94,107 @@ describe("<SearchInput />", () => {
     });
   });
 
-  describe("input keyChange event", () => {
-    it("filters and highlights the items based on the query and calls the onChange handler", () => {
+  describe('input keyChange event', () => {
+    it('filters and highlights the items based on the query and calls the onChange handler', () => {
       rendered = renderComponent();
 
       expect(onChange).not.toHaveBeenCalled();
-      searchFor("ra");
+      searchFor('ra');
       expect(onChange).toHaveBeenCalled();
 
       const expected = [
-        { id: "MH", name: "Maharashtra", html: <span>Maha<span className="highlight">ra</span>shtra</span> },
-        { id: "KL", name: "Kerala", html: <span>Ke<span className="highlight">ra</span>la</span> }
+        { id: 'MH', name: 'Maharashtra', html: <span>Maha<span className="highlight">ra</span>shtra</span> },
+        { id: 'KL', name: 'Kerala', html: <span>Ke<span className="highlight">ra</span>la</span> }
       ];
 
-      expect(onChange.mock.calls[0]).toMatchObject(["ra", expected]);
+      expect(onChange.mock.calls[0]).toMatchObject([
+        'ra',
+        expected
+      ]);
     });
 
-    describe("filtering items", () => {
-      it("only highlights the first instance", () => {
-        // This is basically identical to the test above. Leave it as is
-        // so it's explicitly a separate test, especially since it
-        // doesn't cost much to re-run it. Update in the future as needed
+    describe('filtering items', () => {
+      // eslint-disable-next-line padded-blocks
+      it('only highlights the first instance', () => {
+
+        /*
+         * This is basically identical to the test above. Leave it as is
+         * so it's explicitly a separate test, especially since it
+         * doesn't cost much to re-run it. Update in the future as needed
+         */
 
         rendered = renderComponent();
 
         expect(onChange).not.toHaveBeenCalled();
-        searchFor("ra");
+        searchFor('ra');
         expect(onChange).toHaveBeenCalled();
 
         const expected = [
-          { id: "MH", name: "Maharashtra", html: <span>Maha<span className="highlight">ra</span>shtra</span> },
-          { id: "KL", name: "Kerala", html: <span>Ke<span className="highlight">ra</span>la</span> }
+          { id: 'MH', name: 'Maharashtra', html: <span>Maha<span className="highlight">ra</span>shtra</span> },
+          { id: 'KL', name: 'Kerala', html: <span>Ke<span className="highlight">ra</span>la</span> }
         ];
 
-        expect(onChange.mock.calls[0]).toMatchObject(["ra", expected]);
+        expect(onChange.mock.calls[0]).toMatchObject([
+          'ra',
+          expected
+        ]);
       });
 
-      it("is case insensitive", () => {
+      it('is case insensitive', () => {
         rendered = renderComponent();
 
         expect(onChange).not.toHaveBeenCalled();
-        searchFor("NA");
+        searchFor('NA');
         expect(onChange).toHaveBeenCalled();
 
-        const expected = [
-          { id: "TN", name: "Tamil Nadu", html: <span>Tamil <span className="highlight">Na</span>du</span> },
-        ];
+        const expected = [{ id: 'TN', name: 'Tamil Nadu', html: <span>Tamil <span className="highlight">Na</span>du</span> }];
 
-        expect(onChange.mock.calls[0]).toMatchObject(["NA", expected]);
+        expect(onChange.mock.calls[0]).toMatchObject([
+          'NA',
+          expected
+        ]);
       });
 
-      it("ignores leading or trailing whitespace", () => {
+      it('ignores leading or trailing whitespace', () => {
         rendered = renderComponent();
 
         expect(onChange).not.toHaveBeenCalled();
-        searchFor(" mil ");
+        searchFor(' mil ');
         expect(onChange).toHaveBeenCalled();
 
-        const expected = [
-          { id: "TN", name: "Tamil Nadu", html: <span>Ta<span className="highlight">mil</span> Nadu</span> },
-        ];
+        const expected = [{ id: 'TN', name: 'Tamil Nadu', html: <span>Ta<span className="highlight">mil</span> Nadu</span> }];
 
-        expect(onChange.mock.calls[0]).toMatchObject([" mil ", expected]);
+        expect(onChange.mock.calls[0]).toMatchObject([
+          ' mil ',
+          expected
+        ]);
       });
 
-      it("clearing the input resets the items", () => {
+      it('clearing the input resets the items', () => {
         rendered = renderComponent();
 
-        searchFor("Ta");
-        searchFor("");
+        searchFor('Ta');
+        searchFor('');
 
         const expected = [
-          { id: "TN", name: "Tamil Nadu", html: <span>Tamil Nadu</span> },
-          { id: "MH", name: "Maharashtra", html: <span>Maharashtra</span> },
-          { id: "KL", name: "Kerala", html: <span>Kerala</span> }
+          { id: 'TN', name: 'Tamil Nadu', html: <span>Tamil Nadu</span> },
+          { id: 'MH', name: 'Maharashtra', html: <span>Maharashtra</span> },
+          { id: 'KL', name: 'Kerala', html: <span>Kerala</span> }
         ];
 
-        expect(onChange.mock.calls[1]).toMatchObject(["", expected]);
+        expect(onChange.mock.calls[1]).toMatchObject([
+          '',
+          expected
+        ]);
       });
     });
   });
 });
 
-const getElementInput = () => (rendered.getByTestId("search-input").querySelector("input"));
+const getElementInput = () => rendered.getByTestId('search-input').querySelector('input');
 
 const searchFor = (query) => {
-  let input = getElementInput();
+  const input = getElementInput();
   fireEvent.change(input, { target: { value: query } });
 };
 
@@ -191,7 +209,7 @@ const renderComponent = (additionalProps = {}) => {
     onKeyArrowDown: onKeyArrowDown,
     onKeyArrowUp: onKeyArrowUp
   };
-  const props = {...fixedProps, ...additionalProps };
+  const props = { ...fixedProps, ...additionalProps };
 
   return render(<SearchInput {...props} />);
 };
