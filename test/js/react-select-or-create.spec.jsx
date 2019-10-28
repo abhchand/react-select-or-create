@@ -98,7 +98,7 @@ describe('<ReactSelectOrCreate />', () => {
     ]);
   });
 
-  describe.only('selecting items', () => {
+  describe('selecting items', () => {
     it('user can select an item onClick', () => {
       rendered = renderComponent();
 

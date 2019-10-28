@@ -19,7 +19,7 @@ describe('<OpenMenuButton />', () => {
     expect(button).toHaveAttribute('role', 'button');
   });
 
-  describe.only('label prop', () => {
+  describe('label prop', () => {
     it('overrides the default label when a string is provided', () => {
       const rendered = renderComponent({ label: 'foo' });
 
