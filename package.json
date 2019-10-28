@@ -4,8 +4,8 @@
   "description": "A customizable select-or-create dropdown for ReactJS",
   "main": "./dist/index.js",
   "scripts": {
-    "lint": "eslint src/js/* && stylelint src/styles/*",
-    "lintfix": "eslint src/js/* --fix && stylelint src/styles/* --fix",
+    "lint": "eslint */js/* && stylelint src/styles/*",
+    "lintfix": "eslint */js/* --fix && stylelint src/styles/* --fix",
     "testonly": "jest --no-cache --config test/jest.config.js",
     "test": "yarn run lint && yarn run testonly",
     "dev": "NODE_ENV=development webpack-dev-server --open",

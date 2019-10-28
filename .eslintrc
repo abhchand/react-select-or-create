@@ -78,8 +78,7 @@
     sort-imports:                           ["warn", { ignoreCase: true }],
     sort-keys:                              "off",
     space-before-function-paren:            ["error", "never"],
-    space-in-parens:                        ["warn", "never"],
-
+    space-in-parens:                        ["warn", "never"]
   },
   overrides: [
     {
@@ -89,6 +88,17 @@
       ],
       env: {
         jest: true
+      }
+    },
+    {
+      files: [
+        "test/**/*.js",
+        "test/**/*.jsx"
+      ],
+      rules: {
+        max-lines-per-function:             "off",
+        no-use-before-define:               "off",
+        react/jsx-props-no-spreading:       "off"
       }
     }
   ]
