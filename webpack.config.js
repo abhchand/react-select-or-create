@@ -104,7 +104,7 @@ var exampleConfig = Object.assign({}, config, {
     EXAMPLE_DIR + '/index.jsx'
   ],
   output: {
-    path: DEMO_DIR + '/index',
+    path: DEMO_DIR,
     filename: 'index.js'
   },
   plugins: [
