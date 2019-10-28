@@ -18,8 +18,9 @@
   },
   "keywords": [
     "react",
-    "creatable",
     "select",
+    "create",
+    "select-or-create",
     "dropdown"
   ],
   "author": "Abhishek Chandrasekhar <me@abhchand.me>",
