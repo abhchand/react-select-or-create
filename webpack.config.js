@@ -79,12 +79,20 @@ var config = {
 
 var componentConfig = Object.assign({}, config, {
   entry: [
-    SRC_DIR + '/js/react-select-or-create.jsx',
-    SRC_DIR + '/styles/main.scss'
+    // Order is important here for exposing the final component
+    // From the Webpack docs:
+    //
+    //  > Note that if an array is provided as an entry point,
+    //  > only the last module in the array will be exposed.
+    SRC_DIR + '/styles/main.scss',
+    SRC_DIR + '/js/react-select-or-create.jsx'
   ],
   output: {
     path: DIST_DIR,
-    filename: 'index.js'
+    filename: 'index.js',
+    library: 'ReactSelectOrCreate',
+    libraryTarget: 'umd',
+    umdNamedDefine: true
   },
   plugins: [
     new MiniCssExtractPlugin()
@@ -93,8 +101,8 @@ var componentConfig = Object.assign({}, config, {
 
 var exampleConfig = Object.assign({}, config, {
   entry: [
-    EXAMPLE_DIR + '/index.jsx',
-    SRC_DIR + '/styles/main.scss'
+    SRC_DIR + '/styles/main.scss',
+    EXAMPLE_DIR + '/index.jsx'
   ],
   output: {
     path: DEMO_DIR + '/index',
