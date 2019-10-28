@@ -28,7 +28,8 @@
   },
   "homepage": "https://github.com/abhchand/react-select-or-create#README",
   "peerDependencies": {
-    "react": "^16.0.0"
+    "react": "^16.0.0",
+    "react-dom": "^16.10.2"
   },
   "devDependencies": {
     "@babel/core": "^7.6.4",
@@ -54,6 +55,7 @@
     "node-sass": "^4.12.0",
     "prop-types": "^15.7.2",
     "react": "^16.10.2",
+    "react": "^16.0.0",
     "react-dom": "^16.10.2",
     "sass-loader": "^8.0.0",
     "stylelint": "^11.1.1",
