@@ -124,7 +124,7 @@ Text to be displayed as the search input field `placeholder`
 
 ### `textForCreateItem`
 
-Text to display in the create item section
+Text to display in the create item section. This will be updated as the user types in the search input.
 
 **type**: `{String | Function(String searchValue)}`
 
