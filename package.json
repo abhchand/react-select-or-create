@@ -1,6 +1,6 @@
 {
   "name": "react-select-or-create",
-  "version": "0.1.0",
+  "version": "1.0.0-beta.0",
   "description": "A customizable select-or-create dropdown for ReactJS",
   "main": "./dist/index.js",
   "scripts": {
