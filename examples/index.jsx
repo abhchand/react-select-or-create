@@ -39,7 +39,9 @@ const onCreate = (itemName, prevItems) => {
   alert(`onCreate fired with item '${itemName}'!`);
 
   const id = `id-${new Date().getTime()}`;
-  return prevItems.unshift({ id: id, name: itemName });
+
+  prevItems.unshift({ id: id, name: itemName });
+  return prevItems;
 };
 
 // eslint-disable-next-line no-alert

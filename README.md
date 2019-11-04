@@ -34,11 +34,9 @@ const onSelectHandler = (itemId) => { alert(`Item '${itemId}' clicked!`); };
 
 const onCreateHandler = (itemName, prevItems) => {
   const id = `id-${new Date().getTime()}`;
-  const newItems = prevItems.unshift({ id: id, name: itemName });
+  alert(`Adding '${itemName}' (with id '${id}') to the top of the list!`);
 
-  alert(`Added '${itemName}' (with id '${id}') to the top of the list!`);
-
-  return newItems;
+  return prevItems.unshift({ id: id, name: itemName });
 };
 
 <ReactSelectOrCreate items={countries} onSelect={onSelectHandler} onCreate={onCreateHandler} />
