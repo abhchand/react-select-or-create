@@ -1,4 +1,5 @@
 import { keyCodes, parseKeyCode } from 'utils';
+import autoScrollToShowItem from 'auto-scroll';
 import PropTypes from 'prop-types';
 import React from 'react';
 
@@ -25,6 +26,11 @@ class SelectItems extends React.Component {
     this.onKeyDown = this.onKeyDown.bind(this);
     this.renderEmptyState = this.renderEmptyState.bind(this);
     this.renderItems = this.renderItems.bind(this);
+  }
+
+  // eslint-disable-next-line class-methods-use-this
+  componentDidUpdate() {
+    autoScrollToShowItem();
   }
 
   onClick(e) {
