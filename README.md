@@ -109,11 +109,11 @@ If a `Function` is provided, it will be called and can return any desired conten
 
 ### `textForItemsEmptyState`
 
-Text to be displayed when there are no items to be displayed
+Text to be displayed when the list of `items` is empty.
 
 **type**: `{String}`
 
-**default**: `'No Results'`
+**default**: `'Empty'`
 
 ### `textForSearchInputPlaceholder`
 

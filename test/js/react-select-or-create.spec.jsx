@@ -181,7 +181,6 @@ describe('<ReactSelectOrCreate />', () => {
     it('overrides the default text props when present', () => {
       rendered = renderComponent({
         textForCloseMenuButton: 'foo close',
-        textForItemsEmptyState: 'foo empty',
         textForSearchInputPlaceholder: 'foo search',
         textForCreateItem: (text) => `foo ${text}`
       });
@@ -194,12 +193,21 @@ describe('<ReactSelectOrCreate />', () => {
       // TextForSearchInputPlaceholder
       expect(getElementSearchInput()).toHaveAttribute('placeholder', 'foo search');
 
+      // TextForCreateItem
+      searchFor('zzzz');
+      expect(getElementCreateItem()).toHaveTextContent('foo zzzz');
+
+      cleanup();
+      rendered = renderComponent({
+        items: [],
+        textForItemsEmptyState: 'foo empty'
+      });
+
+      clickOpenMenuButton();
+
       // TextForItemsEmptyState
       searchFor('zzzz');
       expect(getElementSelectItems()).toHaveTextContent('foo empty');
-
-      // TextForCreateItem
-      expect(getElementCreateItem()).toHaveTextContent('foo zzzz');
     });
   });
 });

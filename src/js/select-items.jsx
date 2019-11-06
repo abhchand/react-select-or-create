@@ -16,7 +16,7 @@ class SelectItems extends React.Component {
   };
 
   static defaultProps = {
-    textForEmptyState: 'No results'
+    textForEmptyState: 'Empty'
   }
 
   constructor(props) {
