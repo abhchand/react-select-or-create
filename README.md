@@ -30,22 +30,36 @@ const countries = [
   { id: 'NL', name: 'Netherlands' }
 ];
 
-const onSelectHandler = (itemId) => { alert(`Item '${itemId}' clicked!`); };
-
-const onCreateHandler = (itemName, prevItems) => {
-  const id = `id-${new Date().getTime()}`;
-  alert(`Adding '${itemName}' (with id '${id}') to the top of the list!`);
-
-  return prevItems.unshift({ id: id, name: itemName });
-};
-
-<ReactSelectOrCreate items={countries} onSelect={onSelectHandler} onCreate={onCreateHandler} />
+<ReactSelectOrCreate items={countries} />
 ```
 
-The component also ships with minimal styling that you can import and override as needed:
+Finally, import the styling. The component ships with minimal styling that you can override as needed.
 
 ```scss
 @import "react-select-or-create/dist/main.css";
+```
+
+### Specifying click behavior
+
+The above example renders a simple dropdown, but it's probably not very useful since by default it doesn't do anything when an item is clicked or created.
+
+We can further specify what should happen on click or on create:
+
+```js
+import ReactSelectOrCreate from 'react-select-or-create';
+
+const colors = [{ id: 'blue', name: 'Blue' }, { id: 'pink', name: 'Pink' }];
+
+const onSelect = (itemId) => { alert(`Item '${itemId}' clicked!`); };
+
+const onCreate = (itemName, prevItems) => {
+  alert(`Adding '${itemName}' to the end of the list!`);
+
+  const id = String.prototype.toLowerCase(itemName);
+  return prevItems.concat[{ id: id, name: itemName }];
+};
+
+<ReactSelectOrCreate items={colors} onSelect={onSelect} onCreate={onCreate} />
 ```
 
 # Props
@@ -64,24 +78,32 @@ A list of items to be displayed in the dropdown list
 ]
 ```
 
-### `onSelect` (required)
+### `onSelect`
 
 A function to be called when an item is selected.
 
 **type**: `{Function(String itemId, String itemName)}`
 
+**default**: `null`
+
 The function will receive the id and name of the clicked item as arguments.
 
+If no function is provided, then by default nothing will happen when an item is clicked.
 
-### `onCreate` (required)
+
+### `onCreate`
 
 A function to be called when a new item is created
 
 **type**: `{Function(String itemName, Array prevItems)}`
 
+**default**: `null` (see behavior below)
+
 The function will receive the name of the new item and the list of previous items as arguments.
 
 This function must return a **new list of items** to be displayed. It is up to you to determine how (if at all) the new item is inserted into the list of previous items, and how to generate a new unique id.
+
+If no function is provided, then by default any newly created item will be added to the top of item list with a random `id`.
 
 ### `textForOpenMenuButton`
 

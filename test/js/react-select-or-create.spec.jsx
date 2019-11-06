@@ -177,6 +177,57 @@ describe('<ReactSelectOrCreate />', () => {
     });
   });
 
+  /*
+   * The tests are written so that all optional props are defaulted and
+   * we tested their behavior when specified.
+   * Since the `onSelect` and `onCreate` handlers are optional but
+   * impact so much functionality, we treat them in the opposite manner:
+   * assume they are specified and test their behavior when they are
+   * defaulted here
+   */
+  describe('click handler props', () => {
+    it('onSelect prop can be null', () => {
+      rendered = renderComponent({ onSelect: null });
+
+      clickOpenMenuButton();
+
+      fireEvent.click(getItem('MH'));
+
+      // Menu is closed
+      const component = rendered.container;
+      expect(component).toContainElement(getElementOpenMenuButton());
+      expect(component).not.toContainElement(getElementCloseMenuButton());
+    });
+
+    it('onCreate prop can be null', () => {
+      rendered = renderComponent({ onCreate: null });
+
+      clickOpenMenuButton();
+
+      searchFor('abcde');
+      fireEvent.click(getElementCreateItem());
+
+      // Menu is closed
+      const component = rendered.container;
+      expect(component).toContainElement(getElementOpenMenuButton());
+      expect(component).not.toContainElement(getElementCloseMenuButton());
+    });
+
+    describe('onCreate is null', () => {
+      it('new items are prepended to the list with a random id', () => {
+        rendered = renderComponent({ onCreate: null });
+
+        clickOpenMenuButton();
+
+        searchFor('abcde');
+        fireEvent.click(getElementCreateItem());
+
+        clickOpenMenuButton();
+        expect(displayedItems()[0].name).toEqual('abcde');
+      });
+    });
+  });
+
   describe('text props', () => {
     it('overrides the default text props when present', () => {
       rendered = renderComponent({

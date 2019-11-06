@@ -52,10 +52,7 @@ const textForCreateItem = (searchValue) => {
 };
 
 ReactDom.render(
-  <ReactSelectOrCreate
-    items={items}
-    onCreate={onCreate}
-    onSelect={onSelect} />,
+  <ReactSelectOrCreate items={items} />,
   document.getElementById('app-simple'),
 );
 

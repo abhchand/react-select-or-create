@@ -9,8 +9,8 @@ class ReactSelectOrCreate extends React.Component {
   static propTypes = {
     items: PropTypes.array.isRequired,
 
-    onCreate: PropTypes.func.isRequired,
-    onSelect: PropTypes.func.isRequired,
+    onCreate: PropTypes.func,
+    onSelect: PropTypes.func,
 
     textForOpenMenuButton: PropTypes.oneOfType([
       PropTypes.string,
@@ -28,6 +28,11 @@ class ReactSelectOrCreate extends React.Component {
       PropTypes.string,
       PropTypes.func
     ])
+  };
+
+  static defaultProps = {
+    onCreate: null,
+    onSelect: null
   }
 
   constructor(props) {
@@ -59,16 +64,32 @@ class ReactSelectOrCreate extends React.Component {
   }
 
   onCreate(itemName) {
-    const newItems = this.props.onCreate(itemName, this.state.items);
+    let newItems;
+
+    // eslint-disable-next-line padded-blocks
+    if (this.props.onCreate === null) {
+
+      /*
+       * If no handler was specified, just prepend the new item
+       * to the existing list with a pseudo-random id
+       */
+      const id = `id-${new Date().getTime()}`;
+      newItems = [{ id: id, name: itemName }].concat(this.state.items);
+    }
+    else {
+      newItems = this.props.onCreate(itemName, this.state.items);
+    }
 
     this.setState(() => ({ items: newItems }));
     this.closeMenu();
   }
 
   onSelect(itemId) {
-    const item = this.state.items.find((i) => i.id === itemId);
+    if (this.props.onSelect !== null) {
+      const item = this.state.items.find((i) => i.id === itemId);
+      this.props.onSelect(item.id, item.name);
+    }
 
-    this.props.onSelect(item.id, item.name);
     this.closeMenu();
   }
 
