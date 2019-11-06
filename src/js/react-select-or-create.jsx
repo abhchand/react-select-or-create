@@ -20,7 +20,7 @@ class ReactSelectOrCreate extends React.Component {
       PropTypes.string,
       PropTypes.func
     ]),
-    textForItemsEmptyState: PropTypes.string,
+    textForEmptyState: PropTypes.string,
     textForSearchInputPlaceholder: PropTypes.string,
 
     textForCreateItem: PropTypes.oneOfType([
@@ -94,7 +94,7 @@ class ReactSelectOrCreate extends React.Component {
           handleSelect={this.onSelect}
           handleCreate={this.onCreate}
           textForSearchInputPlaceholder={this.props.textForSearchInputPlaceholder}
-          textForItemsEmptyState={this.props.textForItemsEmptyState}
+          textForEmptyState={this.props.textForEmptyState}
           textForCreateItem={this.props.textForCreateItem} />
       </div>
     );

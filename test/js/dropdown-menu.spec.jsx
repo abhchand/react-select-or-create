@@ -44,7 +44,7 @@ describe('<DropdownMenu />', () => {
       rendered = renderComponent({
         // Force <SelectOpions /> to display empty state
         items: [],
-        textForItemsEmptyState: 'some empty state',
+        textForEmptyState: 'some empty state',
         textForSearchInputPlaceholder: 'some placeholder',
         textForCreateItem: (text) => `${text}-foo`
       });

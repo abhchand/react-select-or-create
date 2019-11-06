@@ -107,7 +107,7 @@ If a `String` is provided it will be automatically wrapped in a `<span>` tag.
 
 If a `Function` is provided, it will be called and can return any desired content, from a simple string to JSX.
 
-### `textForItemsEmptyState`
+### `textForEmptyState`
 
 Text to be displayed when the list of `items` is empty.
 

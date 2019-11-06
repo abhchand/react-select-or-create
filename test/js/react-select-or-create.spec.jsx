@@ -200,12 +200,12 @@ describe('<ReactSelectOrCreate />', () => {
       cleanup();
       rendered = renderComponent({
         items: [],
-        textForItemsEmptyState: 'foo empty'
+        textForEmptyState: 'foo empty'
       });
 
       clickOpenMenuButton();
 
-      // TextForItemsEmptyState
+      // TextForEmptyState
       searchFor('zzzz');
       expect(getElementSelectItems()).toHaveTextContent('foo empty');
     });
