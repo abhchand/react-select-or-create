@@ -115,6 +115,15 @@ Text to be displayed when the list of `items` is empty.
 
 **default**: `'Empty'`
 
+### `textForNoSearchResults`
+
+Text to be displayed when no item matches the search query.
+
+**type**: `{String}`
+
+**default**: `'No Results'`
+
+
 ### `textForSearchInputPlaceholder`
 
 Text to be displayed as the search input field `placeholder`

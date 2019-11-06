@@ -14,6 +14,7 @@ class DropdownMenu extends React.Component {
     handleCreate: PropTypes.func.isRequired,
 
     textForEmptyState: PropTypes.string,
+    textForNoSearchResults: PropTypes.string,
     textForSearchInputPlaceholder: PropTypes.string,
     textForCreateItem: PropTypes.oneOfType([
       PropTypes.string,
@@ -82,10 +83,12 @@ class DropdownMenu extends React.Component {
           placeholder={this.props.textForSearchInputPlaceholder} />
 
         <SelectItems
-          items={this.state.filteredItems}
+          allItems={this.props.items}
+          filteredItems={this.state.filteredItems}
           currentSelectedItemIndex={this.state.currentSelectedItemIndex}
           onClick={this.props.handleSelect}
-          textForEmptyState={this.props.textForEmptyState} />
+          textForEmptyState={this.props.textForEmptyState}
+          textForNoSearchResults={this.props.textForNoSearchResults} />
 
         <CreateItem
           searchInputValue={this.state.searchInputValue}

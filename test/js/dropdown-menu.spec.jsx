@@ -49,17 +49,31 @@ describe('<DropdownMenu />', () => {
         textForCreateItem: (text) => `${text}-foo`
       });
 
-      // First force <CreateItem /> to render by typing in something
       searchFor('abcd');
 
-      const searchInput = getElementSearchInput();
-      const selectItems = getElementSelectItems();
-      const createItem = getElementCreateItem();
+      let searchInput = getElementSearchInput();
+      let selectItems = getElementSelectItems();
+      let createItem = getElementCreateItem();
 
       // Test that text labels are rendered
       expect(searchInput).toHaveAttribute('placeholder', 'some placeholder');
       expect(selectItems).toHaveTextContent('some empty state');
       expect(createItem).toHaveTextContent('abcd-foo');
+
+      cleanup();
+      rendered = renderComponent({
+        textForNoSearchResults: 'no search results state'
+      });
+
+      // Search for something that doesn't exist
+      searchFor('zzz');
+
+      searchInput = getElementSearchInput();
+      selectItems = getElementSelectItems();
+      createItem = getElementCreateItem();
+
+      // Test that text labels are rendered
+      expect(selectItems).toHaveTextContent('no search results state');
     });
   });
 

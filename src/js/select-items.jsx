@@ -6,17 +6,20 @@ import React from 'react';
 class SelectItems extends React.Component {
 
   static propTypes = {
-    items: PropTypes.array.isRequired,
+    allItems: PropTypes.array.isRequired,
+    filteredItems: PropTypes.array.isRequired,
     // eslint-disable-next-line react/no-unused-prop-types
     currentSelectedItemIndex: PropTypes.number.isRequired,
 
     onClick: PropTypes.func.isRequired,
 
-    textForEmptyState: PropTypes.string
+    textForEmptyState: PropTypes.string,
+    textForNoSearchResults: PropTypes.string
   };
 
   static defaultProps = {
-    textForEmptyState: 'Empty'
+    textForEmptyState: 'Empty',
+    textForNoSearchResults: 'No Results'
   }
 
   constructor(props) {
@@ -25,6 +28,7 @@ class SelectItems extends React.Component {
     this.onClick = this.onClick.bind(this);
     this.onKeyDown = this.onKeyDown.bind(this);
     this.renderEmptyState = this.renderEmptyState.bind(this);
+    this.renderNoSearchResults = this.renderNoSearchResults.bind(this);
     this.renderItems = this.renderItems.bind(this);
   }
 
@@ -52,8 +56,12 @@ class SelectItems extends React.Component {
     return <span className="empty-state">{this.props.textForEmptyState}</span>;
   }
 
+  renderNoSearchResults() {
+    return <span className="no-search-results-state">{this.props.textForNoSearchResults}</span>;
+  }
+
   renderItems() {
-    const items = this.props.items;
+    const items = this.props.filteredItems;
     let counter = -1;
     const self = this;
 
@@ -83,7 +91,17 @@ class SelectItems extends React.Component {
   }
 
   render() {
-    const content = this.props.items.length === 0 ? this.renderEmptyState() : this.renderItems();
+    let content;
+
+    if (this.props.allItems.length === 0) {
+      content = this.renderEmptyState();
+    }
+    else if (this.props.filteredItems.length === 0) {
+      content = this.renderNoSearchResults();
+    }
+    else {
+      content = this.renderItems();
+    }
 
     return (
       <ul data-testid="select-items" className="select-items">

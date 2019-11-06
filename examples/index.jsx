@@ -67,6 +67,7 @@ ReactDom.render(
     textForOpenMenuButton="Click to select State"
     textForCloseMenuButton="States of India"
     textForEmptyState="Nothing here"
+    textForNoSearchResults="No matches!"
     textForSearchInputPlaceholder="Search for something.."
     textForCreateItem={textForCreateItem} />,
   document.getElementById('app-customized'),

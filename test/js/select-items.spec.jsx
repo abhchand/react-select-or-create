@@ -5,18 +5,21 @@ import SelectItems from 'select-items';
 
 let rendered;
 
-let items;
+let allItems;
+let filteredItems;
 let currentSelectedItemIndex;
 let onClick;
 
 const defaults = SelectItems.defaultProps;
 
 beforeEach(() => {
-  items = [
+  allItems = [
     { id: 'TN', name: 'Tamil Nadu' },
     { id: 'MH', name: 'Maharashtra' },
-    { id: 'KL', name: 'Kerala' }
+    { id: 'KL', name: 'Kerala' },
+    { id: 'WB', name: 'West Bengal' }
   ];
+  filteredItems = allItems.slice(0, allItems.length);
 
   currentSelectedItemIndex = 0;
   onClick = jest.fn();
@@ -28,7 +31,7 @@ describe('<SelectItems />', () => {
   it('renders the component with the correct selected item', () => {
     rendered = renderComponent({ currentSelectedItemIndex: 1 });
 
-    expect(displayedItems()).toMatchObject(items);
+    expect(displayedItems()).toMatchObject(filteredItems);
 
     const selected = getElementSelectItems().querySelector('li.selected');
     expect(selected.dataset.id).toBe('MH');
@@ -36,16 +39,29 @@ describe('<SelectItems />', () => {
 
   describe('no items exist', () => {
     it('renders the empty state', () => {
-      rendered = renderComponent({ items: [] });
+      rendered = renderComponent({ allItems: [] });
 
       expect(displayedItems()).toMatchObject([]);
       expect(getElementSelectItems()).toHaveTextContent(defaults.textForEmptyState);
     });
+
+    it('overrides the default textForEmptyState when present', () => {
+      rendered = renderComponent({ allItems: [], textForEmptyState: 'foo' });
+
+      expect(getElementSelectItems()).toHaveTextContent('foo');
+    });
   });
 
-  describe('textForEmptyState prop', () => {
+  describe('no search results exist', () => {
+    it('renders the empty state', () => {
+      rendered = renderComponent({ filteredItems: [] });
+
+      expect(displayedItems()).toMatchObject([]);
+      expect(getElementSelectItems()).toHaveTextContent(defaults.textForNoSearchResults);
+    });
+
     it('overrides the default textForEmptyState when present', () => {
-      rendered = renderComponent({ items: [], textForEmptyState: 'foo' });
+      rendered = renderComponent({ filteredItems: [], textForNoSearchResults: 'foo' });
 
       expect(getElementSelectItems()).toHaveTextContent('foo');
     });
@@ -102,7 +118,8 @@ const displayedItems = () => {
 
 const renderComponent = (additionalProps = {}) => {
   const fixedProps = {
-    items: items,
+    allItems: allItems,
+    filteredItems: filteredItems,
     currentSelectedItemIndex: currentSelectedItemIndex,
     onClick: onClick
   };
