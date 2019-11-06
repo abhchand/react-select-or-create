@@ -189,4 +189,4 @@ This will open `http://localhost:3035` in a browser window. Any changes made to 
 
 # Changelog
 
-_empty_
+See [release notes](https://github.com/abhchand/react-select-or-create/releases)
