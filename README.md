@@ -78,6 +78,8 @@ A list of items to be displayed in the dropdown list
 ]
 ```
 
+All `id`s must be unique. If duplicate `id`s are detected, only the first occurance of the item is used and the remaining duplicate items will be discarded.
+
 ### `onSelect`
 
 A function to be called when an item is selected.

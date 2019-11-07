@@ -3,6 +3,7 @@ import DropdownMenu from 'dropdown-menu';
 import OpenMenuButton from 'open-menu-button';
 import PropTypes from 'prop-types';
 import React from 'react';
+import removeDuplicateItems from 'utils/remove-duplicate-items';
 
 class ReactSelectOrCreate extends React.Component {
 
@@ -46,7 +47,7 @@ class ReactSelectOrCreate extends React.Component {
     this.renderMenuOpen = this.renderMenuOpen.bind(this);
 
     this.state = {
-      items: this.props.items,
+      items: removeDuplicateItems(this.props.items),
       menuOpen: false
     };
   }
@@ -80,7 +81,7 @@ class ReactSelectOrCreate extends React.Component {
       newItems = this.props.onCreate(itemName, this.state.items);
     }
 
-    this.setState(() => ({ items: newItems }));
+    this.setState(() => ({ items: removeDuplicateItems(newItems) }));
     this.closeMenu();
   }
 

@@ -16,7 +16,10 @@ beforeEach(() => {
     { id: 'KL', name: 'Kerala' }
   ];
 
-  onCreate = jest.fn();
+  onCreate = jest.fn((itemName, prevItems) => {
+    // Prepend new item to previous list
+    return [{ id: itemName, name: itemName }].concat(prevItems);
+  });
   onSelect = jest.fn();
 });
 
@@ -83,6 +86,24 @@ describe('<ReactSelectOrCreate />', () => {
       expect(component).not.toContainElement(getElementCloseMenuButton());
       expect(component).not.toContainElement(getElementDropdownMenu());
     });
+  });
+
+  it('removes duplicate items', () => {
+    rendered = renderComponent({
+      items: [
+        { id: 'TN', name: 'Tamil Nadu 2' },
+        { id: 'TN', name: 'Tamil Nadu' },
+        { id: 'MH', name: 'Maharashtra' }
+      ]
+    });
+
+    clickOpenMenuButton();
+
+    const expected = [
+      { id: 'TN', name: 'Tamil Nadu 2' },
+      { id: 'MH', name: 'Maharashtra' }
+    ];
+    expect(displayedItems()).toEqual(expected);
   });
 
   it('user can search and filter items', () => {
@@ -174,6 +195,33 @@ describe('<ReactSelectOrCreate />', () => {
         'abcde',
         items
       ]);
+    });
+
+    it('handles items created with duplicate id', () => {
+      rendered = renderComponent({
+        items: [
+          { id: 'TN', name: 'Tamil Nadu' },
+          { id: 'MH', name: 'Maharashtra' }
+        ]
+      });
+
+      clickOpenMenuButton();
+
+      searchFor('TN');
+      fireEvent.click(getElementCreateItem());
+
+      clickOpenMenuButton();
+
+      /*
+       * Our jest mock function prepends the new value with the
+       * same `id` and `name`. The original value will be marked
+       * as duplicate.
+       */
+      const expected = [
+        { id: 'TN', name: 'TN' },
+        { id: 'MH', name: 'Maharashtra' }
+      ];
+      expect(displayedItems()).toEqual(expected);
     });
   });
 
