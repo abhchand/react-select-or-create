@@ -1,0 +1,124 @@
+$dark-gray: #888888;
+$white: #FFFFFF;
+$light-gray: #DDDDDD;
+$mustard: #EABB12;
+
+$leaf-green: #21BB61;
+$leaf-green-darkened: #1C9A50;
+
+$dark-purple: #4F14C8;
+$dark-purple-darkened: #3A0F92;
+
+.cta {
+  font-weight: 600;
+
+  // CSS magic: 1px keeps the text vertically aligned in the button
+  line-height: 1px;
+
+  -webkit-transition: 0.15s ease-in-out;
+  -moz-transition: 0.15s ease-in-out;
+  -o-transition: 0.15s ease-in-out;
+  transition: 0.15s ease-in-out;
+
+  &:disabled {
+    opacity: 0.2;
+  }
+}
+.cta-green {
+  color: $white;
+  background: $leaf-green;
+
+  &:hover {
+    background: $leaf-green-darkened;
+  }
+}
+.cta-purple {
+  color: $white;
+  background: $dark-purple;
+
+  &:hover {
+    background: $dark-purple-darkened;
+  }
+}
+
+.soft-shadow {
+  box-shadow: 0 4px 5px 0 rgba(0,0,0,0.14), 0 1px 10px 0 rgba(0,0,0,0.12), 0 2px 4px -1px rgba(0,0,0,0.2);
+}
+
+.customized .react-select-or-create {
+  height: 100%;
+  font-size: 16px;
+
+  .open-menu-btn, .close-menu-btn {
+    @extend .cta;
+    @extend .cta-purple;
+
+    height: 40px;
+    line-height: 40px;
+    font-weight: 500;
+    font-size: 18px;
+
+    span {
+      line-height: 40px;
+    }
+  }
+
+  .dropdown-menu {
+    @extend .soft-shadow;
+    z-index: 99;
+
+    color: $dark-gray;
+    background-color: $white;
+    border: 1px solid $dark-gray;
+  }
+
+  .search-input {
+    border-bottom: 1px solid $light-gray;
+
+    input {
+      border-color: $light-gray;
+      outline: none;
+
+      &:focus {
+        border-color: $mustard;
+        box-shadow: 0 0 3px $mustard;
+      }
+    }
+  }
+
+  .select-items {
+    .empty-state, .no-search-results-state {
+      text-align: center;
+    }
+
+    li {
+      &.selected {
+        background-color: $light-gray;
+      }
+
+      &:hover {
+        background-color: $light-gray;
+      }
+
+      span.highlight {
+        background-color: $mustard;
+        border-radius: 2px;
+      }
+    }
+  }
+
+  .create-item {
+    @extend .cta;
+    @extend .cta-green;
+
+    height: 40px;
+    font-weight: 700;
+    line-height: 40px;
+    text-align: center;
+    padding-left: 0;
+
+    span {
+      width: 90%;
+    }
+  }
+}

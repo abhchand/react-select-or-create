@@ -61,11 +61,11 @@ ReactDom.render(
     items={items}
     onCreate={onCreate}
     onSelect={onSelect}
-    textForOpenMenuButton="Click to select State"
-    textForCloseMenuButton="States of India"
+    textForOpenMenuButton="What state do you live in?"
+    textForCloseMenuButton="States of India 🇮🇳"
     textForEmptyState="Nothing here"
     textForNoSearchResults="No matches!"
-    textForSearchInputPlaceholder="Search for something.."
+    textForSearchInputPlaceholder="Start typing.."
     textForCreateItem={textForCreateItem} />,
   document.getElementById('app-customized'),
 );

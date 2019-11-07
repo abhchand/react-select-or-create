@@ -101,6 +101,7 @@ var componentConfig = Object.assign({}, config, {
 var exampleConfig = Object.assign({}, config, {
   entry: [
     SRC_DIR + '/styles/main.scss',
+    EXAMPLE_DIR + '/customized-example.scss',
     EXAMPLE_DIR + '/index.jsx'
   ],
   output: {
