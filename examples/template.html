@@ -10,13 +10,22 @@
         top: 0;
         right: 0;
       }
-      .component {
+      .component, .tips {
         width: 100%;
         padding: 20px 0;
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: center;
+      }
+      .tips {
+        margin-top: 350px;
+      }
+      .keyboard-tips {
+        /*width: 350px;*/
+      }
+      .keyboard-tips li {
+        margin: 7px 0;
       }
     </style>
   </head>
@@ -33,6 +42,18 @@
     <div class="component">
       <h3>Customized Component</h3>
       <div id='app-customized'></div>
+    </div>
+
+    <div class="tips">
+      Try out some of these keyboard shortcuts!
+      <ul class="keyboard-tips">
+        <li>Use TAB to focus the button</li>
+        <li>Use ENTER to open the menu</li>
+        <li>Use the ↑ and ↓ ARROW KEYS to navigate between items</li>
+        <li>Use ENTER again to select a highlighted item</li>
+        <li>Use TAB again to select the "Create" button and use ENTER to create an item</li>
+        <li>Use ESCAPE to close the menu</li>
+      </ul>
     </div>
   </body>
 </html>
