@@ -1,6 +1,6 @@
 # react-select-or-create
 
-<p align="center">
+<p align="left">
   <a href="https://www.npmjs.com/package/react-select-or-create">
     <img src="https://img.shields.io/npm/v/react-select-or-create.svg" alt="npm version" >
   </a>
