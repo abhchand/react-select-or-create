@@ -14,9 +14,10 @@
 
 A customizable select-or-create dropdown for ReactJS
 
+You can [view a live demo here](https://abhchand.me/demos/react-select-or-create) or [view this project on npm here](https://www.npmjs.com/package/react-select-or-create)
+
 <img src="meta/demo.gif" width="300" />
 
-You can [view a live demo here](https://abhchand.me/demos/react-select-or-create) or [view this project on npm here](https://www.npmjs.com/package/react-select-or-create)
 
 ### Features
 
