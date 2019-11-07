@@ -1,5 +1,5 @@
 import { cleanup, fireEvent, render } from '@testing-library/react';
-import KeyCodes from 'utils/key-codes';
+import { KeyCodes } from 'utils/key-codes';
 import React from 'react';
 import SearchInput from 'search-input';
 
@@ -73,23 +73,23 @@ describe('<SearchInput />', () => {
 
       // Enter Key
       expect(onKeyEnter).not.toHaveBeenCalled();
-      fireEvent.keyDown(input, KeyCodes.ENTER);
+      fireEvent.keyDown(input, { keyCode: KeyCodes.ENTER });
       expect(onKeyEnter).toHaveBeenCalled();
       expect(onKeyEnter.mock.calls[0]).toMatchObject(['KL']);
 
       // Escape Key
       expect(onKeyEscape).not.toHaveBeenCalled();
-      fireEvent.keyDown(input, KeyCodes.ESCAPE);
+      fireEvent.keyDown(input, { keyCode: KeyCodes.ESCAPE });
       expect(onKeyEscape).toHaveBeenCalled();
 
       // Down Arrow Key
       expect(onKeyArrowDown).not.toHaveBeenCalled();
-      fireEvent.keyDown(input, KeyCodes.ARROW_DOWN);
+      fireEvent.keyDown(input, { keyCode: KeyCodes.ARROW_DOWN });
       expect(onKeyArrowDown).toHaveBeenCalled();
 
       // Up Arrow Key
       expect(onKeyArrowUp).not.toHaveBeenCalled();
-      fireEvent.keyDown(input, KeyCodes.ARROW_UP);
+      fireEvent.keyDown(input, { keyCode: KeyCodes.ARROW_UP });
       expect(onKeyArrowUp).toHaveBeenCalled();
     });
   });

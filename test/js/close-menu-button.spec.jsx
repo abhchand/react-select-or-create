@@ -1,6 +1,6 @@
 import { cleanup, fireEvent, render } from '@testing-library/react';
 import CloseMenuButton from 'close-menu-button';
-import KeyCodes from 'utils/key-codes';
+import { KeyCodes } from 'utils/key-codes';
 import React from 'react';
 
 let onClick;
@@ -61,7 +61,7 @@ describe('<CloseMenuButton />', () => {
       const rendered = renderComponent();
 
       const button = rendered.getByTestId('close-menu-button');
-      fireEvent.keyPress(button, KeyCodes.ENTER);
+      fireEvent.keyPress(button, { keyCode: KeyCodes.ENTER });
 
       expect(onClick).toHaveBeenCalled();
     });
@@ -70,7 +70,7 @@ describe('<CloseMenuButton />', () => {
       const rendered = renderComponent();
 
       const button = rendered.getByTestId('close-menu-button');
-      fireEvent.keyPress(button, KeyCodes.ESCAPE);
+      fireEvent.keyPress(button, { keyCode: KeyCodes.ESCAPE });
 
       expect(onClick).not.toHaveBeenCalled();
     });

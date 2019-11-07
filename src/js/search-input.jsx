@@ -1,4 +1,4 @@
-import { keyCodes, parseKeyCode } from 'utils';
+import { KeyCodes, parseKeyCode } from 'utils/key-codes';
 import PropTypes from 'prop-types';
 import React from 'react';
 
@@ -46,24 +46,24 @@ class SearchInput extends React.Component {
     e.stopPropagation();
 
     switch (parseKeyCode(e)) {
-      case keyCodes.ENTER: {
+      case KeyCodes.ENTER: {
         const idx = this.props.currentSelectedItemIndex;
         const id = this.props.filteredItems[idx].id;
         this.props.onKeyEnter(id);
         break;
       }
 
-      case keyCodes.ESCAPE: {
+      case KeyCodes.ESCAPE: {
         this.props.onKeyEscape();
         break;
       }
 
-      case keyCodes.ARROW_UP: {
+      case KeyCodes.ARROW_UP: {
         this.props.onKeyArrowUp();
         break;
       }
 
-      case keyCodes.ARROW_DOWN: {
+      case KeyCodes.ARROW_DOWN: {
         this.props.onKeyArrowDown();
         break;
       }

@@ -1,5 +1,5 @@
 import { cleanup, fireEvent, render } from '@testing-library/react';
-import KeyCodes from 'utils/key-codes';
+import { KeyCodes } from 'utils/key-codes';
 import React from 'react';
 import ReactSelectOrCreate from 'react-select-or-create';
 
@@ -48,7 +48,7 @@ describe('<ReactSelectOrCreate />', () => {
     it('user can open menu onKeyPress Enter', () => {
       rendered = renderComponent();
 
-      fireEvent.keyPress(getElementOpenMenuButton(), KeyCodes.ENTER);
+      fireEvent.keyPress(getElementOpenMenuButton(), { keyCode: KeyCodes.ENTER });
       const component = rendered.container;
 
       expect(component).not.toContainElement(getElementOpenMenuButton());
@@ -75,7 +75,7 @@ describe('<ReactSelectOrCreate />', () => {
       rendered = renderComponent();
 
       clickOpenMenuButton();
-      fireEvent.keyPress(getElementCloseMenuButton(), KeyCodes.ENTER);
+      fireEvent.keyPress(getElementCloseMenuButton(), { keyCode: KeyCodes.ENTER });
 
       const component = rendered.container;
 
@@ -126,7 +126,7 @@ describe('<ReactSelectOrCreate />', () => {
       expect(onCreate).not.toHaveBeenCalled();
 
       pressArrowDownOnSearchInpupt();
-      fireEvent.keyDown(getElementSearchInput(), KeyCodes.ENTER);
+      fireEvent.keyDown(getElementSearchInput(), { keyCode: KeyCodes.ENTER });
 
       expect(onSelect).toHaveBeenCalled();
       expect(onSelect.mock.calls[0]).toMatchObject([
@@ -166,7 +166,7 @@ describe('<ReactSelectOrCreate />', () => {
       expect(onCreate).not.toHaveBeenCalled();
 
       searchFor('abcde');
-      fireEvent.keyDown(getElementCreateItem(), KeyCodes.ENTER);
+      fireEvent.keyDown(getElementCreateItem(), { keyCode: KeyCodes.ENTER });
 
       expect(onSelect).not.toHaveBeenCalled();
       expect(onCreate).toHaveBeenCalled();
@@ -282,12 +282,12 @@ const clickCloseMenuButton = () => fireEvent.click(getElementCloseMenuButton());
 // eslint-disable-next-line no-unused-vars
 const pressArrowUpOnSearchInput = () => {
   const searchInput = getElementSearchInput();
-  return fireEvent.keyDown(searchInput, KeyCodes.ARROW_UP);
+  return fireEvent.keyDown(searchInput, { keyCode: KeyCodes.ARROW_UP });
 };
 
 const pressArrowDownOnSearchInpupt = () => {
   const searchInput = getElementSearchInput();
-  return fireEvent.keyDown(searchInput, KeyCodes.ARROW_DOWN);
+  return fireEvent.keyDown(searchInput, { keyCode: KeyCodes.ARROW_DOWN });
 };
 
 const getItem = (itemId) => rendered.getByTestId('select-items').querySelector(`li[data-id="${itemId}"] div`);

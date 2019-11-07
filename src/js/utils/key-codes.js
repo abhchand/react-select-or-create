@@ -1,4 +1,4 @@
-const keyCodes = Object.freeze({
+const KeyCodes = Object.freeze({
   ARROW_DOWN: 40,
   ARROW_UP:   38,
   ENTER:      13,
@@ -11,6 +11,6 @@ function parseKeyCode(event) {
 }
 
 export {
-  keyCodes,
+  KeyCodes,
   parseKeyCode
 };

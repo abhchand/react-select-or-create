@@ -1,4 +1,4 @@
-import { keyCodes, parseKeyCode } from 'utils';
+import { KeyCodes, parseKeyCode } from 'utils/key-codes';
 import PropTypes from 'prop-types';
 import React from 'react';
 
@@ -26,7 +26,7 @@ const CloseMenuButton = (props) => {
       className="close-menu-btn"
       tabIndex={0}
       onClick={props.onClick}
-      onKeyPress={(e) => { if (parseKeyCode(e) === keyCodes.ENTER) { props.onClick(e); } }}>
+      onKeyPress={(e) => { if (parseKeyCode(e) === KeyCodes.ENTER) { props.onClick(e); } }}>
       {labelContent}
     </div>
   );

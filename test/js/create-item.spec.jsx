@@ -1,6 +1,6 @@
 import { cleanup, fireEvent, render } from '@testing-library/react';
 import CreateItem from 'create-item';
-import KeyCodes from 'utils/key-codes';
+import { KeyCodes } from 'utils/key-codes';
 import React from 'react';
 
 let searchInputValue;
@@ -52,7 +52,7 @@ describe('<CreateItem />', () => {
       const rendered = renderComponent();
 
       const button = rendered.getByTestId('create-item');
-      fireEvent.keyDown(button, KeyCodes.ENTER);
+      fireEvent.keyDown(button, { keyCode: KeyCodes.ENTER });
 
       expect(onClick).toHaveBeenCalled();
     });
@@ -61,7 +61,7 @@ describe('<CreateItem />', () => {
       const rendered = renderComponent();
 
       const button = rendered.getByTestId('create-item');
-      fireEvent.keyDown(button, KeyCodes.ESCAPE);
+      fireEvent.keyDown(button, { keyCode: KeyCodes.ESCAPE });
 
       expect(onClick).not.toHaveBeenCalled();
     });

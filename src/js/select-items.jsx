@@ -1,4 +1,4 @@
-import { keyCodes, parseKeyCode } from 'utils';
+import { KeyCodes, parseKeyCode } from 'utils/key-codes';
 import autoScrollToShowItem from 'auto-scroll';
 import PropTypes from 'prop-types';
 import React from 'react';
@@ -44,7 +44,7 @@ class SelectItems extends React.Component {
 
   onKeyDown(e) {
     switch (parseKeyCode(e)) {
-      case keyCodes.ENTER: {
+      case KeyCodes.ENTER: {
         this.onClick(e);
         break;
       }

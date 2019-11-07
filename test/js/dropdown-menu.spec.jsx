@@ -1,6 +1,6 @@
 import { cleanup, fireEvent, render } from '@testing-library/react';
 import DropdownMenu from 'dropdown-menu';
-import KeyCodes from 'utils/key-codes';
+import { KeyCodes } from 'utils/key-codes';
 import React from 'react';
 
 let rendered;
@@ -154,12 +154,12 @@ const getElementCreateItem = () => rendered.queryByTestId('create-item');
 
 const pressArrowUpOnSearchInput = () => {
   const searchInput = getElementSearchInput();
-  return fireEvent.keyDown(searchInput, KeyCodes.ARROW_UP);
+  return fireEvent.keyDown(searchInput, { keyCode: KeyCodes.ARROW_UP });
 };
 
 const pressArrowDownOnSearchInpupt = () => {
   const searchInput = getElementSearchInput();
-  return fireEvent.keyDown(searchInput, KeyCodes.ARROW_DOWN);
+  return fireEvent.keyDown(searchInput, { keyCode: KeyCodes.ARROW_DOWN });
 };
 
 const expectCurrentSelectedItemToBe = (expectedItemId) => {

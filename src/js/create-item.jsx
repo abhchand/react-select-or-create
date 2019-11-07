@@ -1,4 +1,4 @@
-import { keyCodes, parseKeyCode } from 'utils';
+import { KeyCodes, parseKeyCode } from 'utils/key-codes';
 import PropTypes from 'prop-types';
 import React from 'react';
 
@@ -32,7 +32,7 @@ class CreateItem extends React.Component {
 
   onKeyDown(e) {
     switch (parseKeyCode(e)) {
-      case keyCodes.ENTER: {
+      case KeyCodes.ENTER: {
         this.onClick(e);
         break;
       }

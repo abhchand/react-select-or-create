@@ -1,5 +1,5 @@
 import { cleanup, fireEvent, render } from '@testing-library/react';
-import KeyCodes from 'utils/key-codes';
+import { KeyCodes } from 'utils/key-codes';
 import React from 'react';
 import SelectItems from 'select-items';
 
@@ -84,7 +84,7 @@ describe('<SelectItems />', () => {
       rendered = renderComponent();
       expect(onClick).not.toHaveBeenCalled();
 
-      fireEvent.keyDown(getItem('KL').querySelector('div'), KeyCodes.ENTER);
+      fireEvent.keyDown(getItem('KL').querySelector('div'), { keyCode: KeyCodes.ENTER });
 
       expect(onClick).toHaveBeenCalled();
       expect(onClick.mock.calls[0]).toMatchObject(['KL']);
@@ -94,7 +94,7 @@ describe('<SelectItems />', () => {
       rendered = renderComponent();
       expect(onClick).not.toHaveBeenCalled();
 
-      fireEvent.keyDown(getItem('KL').querySelector('div'), KeyCodes.ESCAPE);
+      fireEvent.keyDown(getItem('KL').querySelector('div'), { keyCode: KeyCodes.ESCAPE });
 
       expect(onClick).not.toHaveBeenCalled();
     });
