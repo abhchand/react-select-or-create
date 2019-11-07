@@ -43,7 +43,7 @@ Finally, import the styling. The component ships with minimal styling that you c
 
 The above example renders a simple dropdown, but it's probably not very useful since by default it doesn't do anything when an item is clicked or created.
 
-We can further specify what should happen on click or on create:
+We can specify this behavior with the `onSelect` and `onCreate` function handlers:
 
 ```js
 import ReactSelectOrCreate from 'react-select-or-create';
