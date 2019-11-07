@@ -91,8 +91,8 @@ A list of items to be displayed in the dropdown list
 
 ```
 [
-  { id: 'JP', name: 'Apple' },
-  { id: 'NG', name: 'Banana' }
+  { id: 1, name: 'Apple' },
+  { id: 2, name: 'Banana' }
 ]
 ```
 
