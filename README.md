@@ -1,3 +1,17 @@
+# react-select-or-create
+
+<p align="center">
+  <a href="https://www.npmjs.com/package/react-select-or-create">
+    <img src="https://img.shields.io/npm/v/react-select-or-create.svg" alt="npm version" >
+  </a>
+  <a href="https://packagephobia.now.sh/result?p=react-select-or-create">
+    <img src="https://packagephobia.now.sh/badge?p=react-select-or-create" alt="install size" >
+  </a>
+  <a href="https://github.com/abhchand/react-select-or-create/blob/master/LICENSE.md">
+    <img src="https://img.shields.io/npm/l/react-select-or-create.svg" alt="license">
+  </a>
+</p>
+
 A customizable select-or-create dropdown for ReactJS
 
 <img src="meta/demo.gif" width="300" />
