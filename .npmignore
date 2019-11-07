@@ -4,6 +4,7 @@
 .eslintrc
 .gitignore
 .stylelintrc
+.circleci
 demo
 examples
 LICENSE.md
