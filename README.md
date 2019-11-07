@@ -10,6 +10,9 @@
   <a href="https://github.com/abhchand/react-select-or-create/blob/master/LICENSE.md">
     <img src="https://img.shields.io/npm/l/react-select-or-create.svg" alt="license">
   </a>
+  <a href="https://circleci.com/gh/abhchand/react-select-or-create">
+    <img src="https://circleci.com/gh/abhchand/react-select-or-create.svg?style=shield&circle-token=:circle-token">
+  </a>
 </p>
 
 A customizable select-or-create dropdown for ReactJS
