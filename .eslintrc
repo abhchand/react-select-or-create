@@ -40,6 +40,7 @@
     init-declarations:                      "off",
     key-spacing:                            ["error", { "mode": "minimum" }],
     max-len:                                ["warn", 150, { comments: 80, ignoreTrailingComments: true, ignoreUrls: true }],
+    max-lines-per-function:                 ["error", { skipComments: true, skipBlankLines: true }],
     max-statements-per-line:                "off",
     max-statements:                         "off",
     multiline-ternary:                      "off",
@@ -49,6 +50,7 @@
     no-magic-numbers:                       ["warn", { "ignore": [-1, 0, 1] }],
     no-plusplus:                            ["warn", { "allowForLoopAfterthoughts": true }],
     no-ternary:                             "off",
+    no-unused-vars:                         ["error", { argsIgnorePattern: "^_", varsIgnorePattern: "^_" }],
     object-curly-spacing:                   ["error", "always"],
     object-property-newline:                ["error", { "allowAllPropertiesOnSameLine": true }],
     object-shorthand:                       "off",
@@ -81,6 +83,14 @@
     space-in-parens:                        ["warn", "never"]
   },
   overrides: [
+    {
+      files: [
+        "**/*.jsx"
+      ],
+      rules: {
+        "class-methods-use-this":           "off"
+      }
+    },
     {
       files: [
         "**/*.spec.js",

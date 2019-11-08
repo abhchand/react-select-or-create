@@ -32,7 +32,6 @@ class SelectItems extends React.Component {
     this.renderItems = this.renderItems.bind(this);
   }
 
-  // eslint-disable-next-line class-methods-use-this
   componentDidUpdate() {
     autoScrollToShowItem();
   }
