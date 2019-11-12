@@ -261,17 +261,130 @@ describe('<ReactSelectOrCreate />', () => {
       expect(component).not.toContainElement(getElementCloseMenuButton());
     });
 
-    describe('onCreate is null', () => {
-      it('new items are prepended to the list with a random id', () => {
-        rendered = renderComponent({ onCreate: null });
+    describe('onCreate prop behavior', () => {
+      describe('onCreate is null', () => {
+        it('new items are prepended to the list with a random id', () => {
+          rendered = renderComponent({ onCreate: null });
 
-        clickOpenMenuButton();
+          clickOpenMenuButton();
 
-        searchFor('abcde');
-        fireEvent.click(getElementCreateItem());
+          searchFor('abcde');
+          fireEvent.click(getElementCreateItem());
 
-        clickOpenMenuButton();
-        expect(displayedItems()[0].name).toEqual('abcde');
+          clickOpenMenuButton();
+          expect(displayedItems()[0].name).toEqual('abcde');
+        });
+      });
+
+      describe('onCreate returns an object', () => {
+        it('uses the returned object to set the new value of `items`', () => {
+          onCreate = jest.fn((itemName, prevItems) => {
+            return [{ id: 'foo', name: itemName }].concat(prevItems);
+          });
+
+          rendered = renderComponent();
+
+          clickOpenMenuButton();
+
+          searchFor('abcde');
+          fireEvent.click(getElementCreateItem());
+
+          clickOpenMenuButton();
+          expect(displayedItems()[0].id).toEqual('foo');
+          expect(displayedItems()[0].name).toEqual('abcde');
+        });
+
+        it('removes duplicates from the returned value', () => {
+          onCreate = jest.fn((itemName, _prevItems) => {
+            return [
+              { id: 'foo', name: itemName },
+              { id: 'foo', name: 'other' }
+            ];
+          });
+
+          rendered = renderComponent();
+
+          clickOpenMenuButton();
+
+          searchFor('abcde');
+          fireEvent.click(getElementCreateItem());
+
+          clickOpenMenuButton();
+
+          const results = displayedItems();
+          expect(results[0].id).toEqual('foo');
+          expect(results[0].name).toEqual('abcde');
+          expect(results.length).toEqual(1);
+        });
+      });
+
+      describe('onCreate returns a Promise', () => {
+        it('uses the returned object to set the new value of `items`', async() => {
+          onCreate = jest.fn((itemName, prevItems) => {
+            const newItems = [{ id: 'foo', name: itemName }].concat(prevItems);
+            return Promise.resolve(newItems);
+          });
+
+          rendered = renderComponent();
+
+          clickOpenMenuButton();
+
+          searchFor('abcde');
+          fireEvent.click(getElementCreateItem());
+
+          // Menu should have closed
+          expect(getElementOpenMenuButton()).not.toBeNull();
+
+          // eslint-disable-next-line
+          await (reopenMenu() && expect(displayedItems()[0].id).toEqual('foo') &&
+            expect(displayedItems()[0].name).toEqual('abcde'));
+        });
+
+        it('removes duplicates from the returned value', async() => {
+          onCreate = jest.fn((itemName, _prevItems) => {
+            const newItems = [
+              { id: 'foo', name: itemName },
+              { id: 'foo', name: 'other' }
+            ];
+            return Promise.resolve(newItems);
+          });
+
+          rendered = renderComponent();
+
+          clickOpenMenuButton();
+
+          searchFor('abcde');
+          fireEvent.click(getElementCreateItem());
+
+          // Menu should have closed
+          expect(getElementOpenMenuButton()).not.toBeNull();
+
+          // eslint-disable-next-line
+          await (reopenMenu() && expect(displayedItems()[0].id).toEqual('foo') &&
+            expect(displayedItems()[0].name).toEqual('abcde') &&
+            expect(displayedItems().length).toEqual(1));
+        });
+
+        it('gracefully handles any errors', async() => {
+          onCreate = jest.fn((_itemName, _prevItems) => {
+            // eslint-disable-next-line prefer-promise-reject-errors
+            return Promise.reject('rejected promise');
+          });
+
+          rendered = renderComponent();
+
+          clickOpenMenuButton();
+
+          searchFor('abcde');
+          fireEvent.click(getElementCreateItem());
+
+          // Menu should have closed
+          expect(getElementOpenMenuButton()).not.toBeNull();
+
+          // eslint-disable-next-line
+          await (reopenMenu() && expect(displayedItems()[0].id).toEqual('TN') &&
+            expect(displayedItems()[0].name).toEqual('Tamil Nadu'));
+        });
       });
     });
   });
@@ -326,6 +439,10 @@ const getElementSelectItems = () => rendered.getByTestId('select-items');
 
 const clickOpenMenuButton = () => fireEvent.click(getElementOpenMenuButton());
 const clickCloseMenuButton = () => fireEvent.click(getElementCloseMenuButton());
+const reopenMenu = () => {
+  if (getElementCloseMenuButton()) { clickCloseMenuButton(); }
+  if (getElementOpenMenuButton()) { clickOpenMenuButton(); }
+};
 
 // eslint-disable-next-line no-unused-vars
 const pressArrowUpOnSearchInput = () => {

@@ -39,6 +39,7 @@ class ReactSelectOrCreate extends React.Component {
   constructor(props) {
     super(props);
 
+    this.updateItems = this.updateItems.bind(this);
     this.openMenu = this.openMenu.bind(this);
     this.closeMenu = this.closeMenu.bind(this);
     this.onCreate = this.onCreate.bind(this);
@@ -50,6 +51,12 @@ class ReactSelectOrCreate extends React.Component {
       items: removeDuplicateItems(this.props.items),
       menuOpen: false
     };
+  }
+
+  updateItems(newItems) {
+    this.setState((_prevState) => {
+      return { items: removeDuplicateItems(newItems) };
+    });
   }
 
   openMenu() {
@@ -65,24 +72,43 @@ class ReactSelectOrCreate extends React.Component {
   }
 
   onCreate(itemName) {
-    let newItems;
+    this.closeMenu();
 
-    // eslint-disable-next-line padded-blocks
+    /* eslint-disable lines-around-comment */
+
     if (this.props.onCreate === null) {
-
       /*
        * If no handler was specified, just prepend the new item
        * to the existing list with a pseudo-random id
        */
       const id = `id-${new Date().getTime()}`;
-      newItems = [{ id: id, name: itemName }].concat(this.state.items);
-    }
-    else {
-      newItems = this.props.onCreate(itemName, this.state.items);
+      const newItems = [{ id: id, name: itemName }].concat(this.state.items);
+
+      this.updateItems(newItems);
+      return;
     }
 
-    this.setState(() => ({ items: removeDuplicateItems(newItems) }));
-    this.closeMenu();
+    const returnVal = this.props.onCreate(itemName, this.state.items);
+
+    if (typeof returnVal.then === 'function') {
+      /*
+       * If the handler returns a Promise, evaluate it asynchronously
+       * and set the resulting object as the new value of `items`
+       * Also see: https://stackoverflow.com/q/27746304/2490003
+       */
+      returnVal.
+        then((newItems) => this.updateItems(newItems)).
+        catch((error) => console.error(error)); // eslint-disable-line no-console
+    }
+    else if (typeof returnVal === 'object') {
+      /*
+       * If the handler returns an object, set that object as the new
+       * value of `items`.
+       */
+      this.updateItems(returnVal);
+    }
+
+    /* eslint-enable lines-around-comment */
   }
 
   onSelect(itemId) {

@@ -80,6 +80,29 @@ const onCreate = (itemName, prevItems) => {
 <ReactSelectOrCreate items={colors} onSelect={onSelect} onCreate={onCreate} />
 ```
 
+### Specifying asynchronous behavior
+
+It is sometimes useful to asynchronously run the `onCreate` logic that handles the creation of a new item.
+
+For example, if you are managing a list of "teams" and the user creates a new team (item), you may want to asynchronously send a `POST` request to your application's server before updating the list.
+
+The `onCreate` prop allows you to return a [`Promise`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Using_promises) which will eventually return an updated list of items.
+
+```js
+const onCreate = (itemName, prevItems) => {
+
+  // We use an artificial delay with `setTimeout()` here to
+  // mimic a long running async action
+  // Reminder: Make sure you `return` your Promise!
+
+  return new Promise((resolve) => setTimeout(resolve, 5000))
+  .then(() => {
+    const id = String.prototype.toLowerCase(itemName);
+    return prevItems.concat[{ id: id, name: itemName }];
+  })
+};
+```
+
 # Props
 
 
@@ -119,11 +142,14 @@ A function to be called when a new item is created
 
 **default**: `null` (see behavior below)
 
-The function will receive the name of the new item and the list of previous items as arguments.
+If no function is provided (e.g. `onCreate: null`), then any newly created item will be added to the top of the item list with a randomly generated `id`.
 
-This function must return a **new list of items** to be displayed. It is up to you to determine how (if at all) the new item is inserted into the list of previous items, and how to generate a new unique id.
+If a function definition is provided, it will receive as arguments the name of the new item and the array of previous items. It must return either:
 
-If no function is provided, then by default any newly created item will be added to the top of item list with a random `id`.
+* a **new array of items** to be displayed
+* a `Promise` that will return a **new array of items** to be displayed
+
+Please note that it is entirely up to you to determine how to modify the array of previous items to add in the newly created item, as well as how to generate a new unique id for it.
 
 ### `textForOpenMenuButton`
 
