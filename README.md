@@ -74,7 +74,7 @@ const onCreate = (itemName, prevItems) => {
   alert(`Adding '${itemName}' to the end of the list!`);
 
   const id = String.prototype.toLowerCase(itemName);
-  return prevItems.concat[{ id: id, name: itemName }];
+  return prevItems.concat([{ id: id, name: itemName }]);
 };
 
 <ReactSelectOrCreate items={colors} onSelect={onSelect} onCreate={onCreate} />
@@ -98,7 +98,7 @@ const onCreate = (itemName, prevItems) => {
   return new Promise((resolve) => setTimeout(resolve, 5000))
   .then(() => {
     const id = String.prototype.toLowerCase(itemName);
-    return prevItems.concat[{ id: id, name: itemName }];
+    return prevItems.concat([{ id: id, name: itemName }]);
   })
 };
 ```
