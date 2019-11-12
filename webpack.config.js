@@ -95,7 +95,8 @@ var componentConfig = Object.assign({}, config, {
   },
   plugins: [
     new MiniCssExtractPlugin()
-  ]
+  ],
+  devtool: 'source-map'
 });
 
 var exampleConfig = Object.assign({}, config, {
