@@ -151,6 +151,26 @@ If a function definition is provided, it will receive as arguments the name of t
 
 Please note that it is entirely up to you to determine how to modify the array of previous items to add in the newly created item, as well as how to generate a new unique id for it.
 
+### `createItemBehaviorOnEmptySearch`
+
+Defines the behavior of the "create" button _when the search field is blank_.
+
+**type**: `{String}`
+
+**default**: `'disabled'`
+
+There are 3 possible values:
+
+|value|description|
+|---|---|
+|`hidden`|The button will not be rendered.|
+|`disabled`|The button will be rendered, but disabled. Clicking on the button or using the `ENTER` key will **not** trigger the `onCreate` handler. A special CSS class `create-item--disabled` will also be added so you can easily style the disabled state.|
+|`enabled`|The button will be rendered as fully functional. Clicking on the button or using the `ENTER` key **will** trigger the `onCreate` handler.|
+
+In all cases the button will become enabled and clickable once some text is entered into the search field.
+
+If any other value is provided, it will ignore it and fall back on the default value.
+
 ### `textForOpenMenuButton`
 
 Text to be displayed in the "open" button

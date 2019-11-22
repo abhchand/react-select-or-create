@@ -389,6 +389,18 @@ describe('<ReactSelectOrCreate />', () => {
     });
   });
 
+  describe('createItemBehaviorOnEmptySearch prop', () => {
+    it('overrides the default behavior when present', () => {
+      rendered = renderComponent({ createItemBehaviorOnEmptySearch: 'hidden' });
+
+      clickOpenMenuButton();
+
+      expect(getElementCreateItem()).toBeNull();
+      searchFor('abcde');
+      expect(getElementCreateItem()).not.toBeNull();
+    });
+  });
+
   describe('text props', () => {
     it('overrides the default text props when present', () => {
       rendered = renderComponent({
@@ -433,9 +445,9 @@ describe('<ReactSelectOrCreate />', () => {
 const getElementOpenMenuButton = () => rendered.queryByTestId('open-menu-button');
 const getElementCloseMenuButton = () => rendered.queryByTestId('close-menu-button');
 const getElementDropdownMenu = () => rendered.queryByTestId('dropdown-menu');
-const getElementSearchInput = () => rendered.getByTestId('search-input').querySelector('input');
-const getElementCreateItem = () => rendered.getByTestId('create-item');
-const getElementSelectItems = () => rendered.getByTestId('select-items');
+const getElementSearchInput = () => rendered.queryByTestId('search-input').querySelector('input');
+const getElementCreateItem = () => rendered.queryByTestId('create-item');
+const getElementSelectItems = () => rendered.queryByTestId('select-items');
 
 const clickOpenMenuButton = () => fireEvent.click(getElementOpenMenuButton());
 const clickCloseMenuButton = () => fireEvent.click(getElementCloseMenuButton());

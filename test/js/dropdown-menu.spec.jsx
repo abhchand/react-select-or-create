@@ -39,6 +39,19 @@ describe('<DropdownMenu />', () => {
     expect(displayedItems()).toMatchObject(items);
   });
 
+  describe('createItemBehaviorOnEmptySearch prop', () => {
+    it('defines the behavior correctly in the child components', () => {
+      rendered = renderComponent({
+        textForCreateItem: (text) => `Create '${text}'`,
+        createItemBehaviorOnEmptySearch: 'hidden'
+      });
+
+      expect(getElementCreateItem()).toBeNull();
+      searchFor('ra');
+      expect(getElementCreateItem()).not.toBeNull();
+    });
+  });
+
   describe('text value props', () => {
     it('overrides the text values correctly in the child components', () => {
       rendered = renderComponent({

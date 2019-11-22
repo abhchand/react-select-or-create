@@ -13,6 +13,8 @@ class ReactSelectOrCreate extends React.Component {
     onCreate: PropTypes.func,
     onSelect: PropTypes.func,
 
+    createItemBehaviorOnEmptySearch: PropTypes.string,
+
     textForOpenMenuButton: PropTypes.oneOfType([
       PropTypes.string,
       PropTypes.func
@@ -142,6 +144,7 @@ class ReactSelectOrCreate extends React.Component {
           closeMenu={this.closeMenu}
           handleSelect={this.onSelect}
           handleCreate={this.onCreate}
+          createItemBehaviorOnEmptySearch={this.props.createItemBehaviorOnEmptySearch}
           textForSearchInputPlaceholder={this.props.textForSearchInputPlaceholder}
           textForEmptyState={this.props.textForEmptyState}
           textForNoSearchResults={this.props.textForNoSearchResults}

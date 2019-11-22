@@ -61,6 +61,7 @@ ReactDom.render(
     items={items}
     onCreate={onCreate}
     onSelect={onSelect}
+    createItemBehaviorOnEmptySearch="disabled"
     textForOpenMenuButton="What state do you live in?"
     textForCloseMenuButton="States of India 🇮🇳"
     textForEmptyState="Nothing here"

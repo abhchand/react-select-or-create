@@ -116,9 +116,20 @@ $dark-purple-darkened: #3A0F92;
     line-height: 40px;
     text-align: center;
     padding-left: 0;
+    cursor: pointer;
 
     span {
       width: 90%;
+    }
+  }
+
+  .create-item--disabled {
+    cursor: default;
+    background: $leaf-green-darkened;
+    opacity: 0.5;
+
+    span {
+      color: $light-gray;
     }
   }
 }

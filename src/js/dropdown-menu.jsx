@@ -13,6 +13,8 @@ class DropdownMenu extends React.Component {
     handleSelect: PropTypes.func.isRequired,
     handleCreate: PropTypes.func.isRequired,
 
+    createItemBehaviorOnEmptySearch: PropTypes.string,
+
     textForEmptyState: PropTypes.string,
     textForNoSearchResults: PropTypes.string,
     textForSearchInputPlaceholder: PropTypes.string,
@@ -93,6 +95,7 @@ class DropdownMenu extends React.Component {
         <CreateItem
           searchInputValue={this.state.searchInputValue}
           onClick={this.props.handleCreate}
+          behaviorOnEmptySearch={this.props.createItemBehaviorOnEmptySearch}
           label={this.props.textForCreateItem} />
       </div>
     );
