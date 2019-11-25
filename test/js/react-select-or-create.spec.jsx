@@ -88,22 +88,44 @@ describe('<ReactSelectOrCreate />', () => {
     });
   });
 
-  it('removes duplicate items', () => {
-    rendered = renderComponent({
-      items: [
-        { id: 'TN', name: 'Tamil Nadu 2' },
+  describe('closing the dropdown menu', () => {
+    it('removes items with null or undefined id', () => {
+      rendered = renderComponent({
+        items: [
+          { id: 'TN', name: 'Tamil Nadu' },
+          { id: null, name: 'Foo' },
+          // eslint-disable-next-line no-undefined
+          { id: undefined, name: 'Bar' },
+          { id: 'MH', name: 'Maharashtra' }
+        ]
+      });
+
+      clickOpenMenuButton();
+
+      const expected = [
         { id: 'TN', name: 'Tamil Nadu' },
         { id: 'MH', name: 'Maharashtra' }
-      ]
+      ];
+      expect(displayedItems()).toEqual(expected);
     });
 
-    clickOpenMenuButton();
+    it('removes duplicate items', () => {
+      rendered = renderComponent({
+        items: [
+          { id: 'TN', name: 'Tamil Nadu 2' },
+          { id: 'TN', name: 'Tamil Nadu' },
+          { id: 'MH', name: 'Maharashtra' }
+        ]
+      });
 
-    const expected = [
-      { id: 'TN', name: 'Tamil Nadu 2' },
-      { id: 'MH', name: 'Maharashtra' }
-    ];
-    expect(displayedItems()).toEqual(expected);
+      clickOpenMenuButton();
+
+      const expected = [
+        { id: 'TN', name: 'Tamil Nadu 2' },
+        { id: 'MH', name: 'Maharashtra' }
+      ];
+      expect(displayedItems()).toEqual(expected);
+    });
   });
 
   it('user can search and filter items', () => {

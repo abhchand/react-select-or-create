@@ -119,7 +119,10 @@ A list of items to be displayed in the dropdown list
 ]
 ```
 
-All `id`s must be unique. If duplicate `id`s are detected, only the first occurance of the item is used and the remaining duplicate items will be discarded.
+`items` will be validated as follows:
+
+* All `id`s must be unique. If duplicate `id`s are detected, only the first occurance of the item is used and the remaining duplicate items will be ignored when rendering.
+* ALl `id`s must be non-`null` and non-`undefined` or they will be ignored when rendering.
 
 ### `onSelect`
 

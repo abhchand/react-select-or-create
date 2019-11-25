@@ -1,3 +1,30 @@
+function removeNullIdItems(items) {
+  const presentItems = [];
+  const nullItems = [];
+
+  for (let i = 0; i < items.length; i++) {
+    if (typeof items[i].id !== 'undefined' && items[i].id !== null) {
+      presentItems.push(items[i]);
+    }
+    else {
+      nullItems.push(items[i]);
+    }
+  }
+
+  /*
+   * Not ideal, but this avoids printing console messages
+   * during jest test runs
+   */
+  if (typeof jest === 'undefined' && nullItems.length > 0) {
+    const text = nullItems.map((item) => JSON.stringify(item)).join(', ');
+
+    // eslint-disable-next-line no-console
+    console.warn(`ids can not be \`null\` or \`undefined\`! The following items were not rendered: ${text}`);
+  }
+
+  return presentItems;
+}
+
 function removeDuplicateItems(items) {
   const ids = [];
   const duplicateItems = [];
@@ -29,4 +56,8 @@ function removeDuplicateItems(items) {
   return uniqueItems;
 }
 
-export default removeDuplicateItems;
+function parseItems(items) {
+  return removeDuplicateItems(removeNullIdItems(items));
+}
+
+export default parseItems;
