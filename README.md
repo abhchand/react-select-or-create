@@ -105,6 +105,17 @@ const onCreate = (itemName, prevItems) => {
 
 # Props
 
+* [`items`](#items) (required)
+* [`onSelect`](#onSelect)
+* [`onCreate`](#onCreate)
+* [`createItemBehaviorOnEmptySearch`](#createItemBehaviorOnEmptySearch)
+* [`textForOpenMenuButton`](#textForOpenMenuButton)
+* [`textForCloseMenuButton`](#textForCloseMenuButton)
+* [`textForEmptyState`](#textForEmptyState)
+* [`textForNoSearchResults`](#textForNoSearchResults)
+* [`textForSearchInputPlaceholder`](#textForSearchInputPlaceholder)
+* [`textForCreateItem`](#textForCreateItem)
+
 
 ### `items` (required)
 
