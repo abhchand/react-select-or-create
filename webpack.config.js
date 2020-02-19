@@ -4,7 +4,8 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const webpack = require('webpack');
 
-var DEMO_DIR = path.resolve(__dirname, 'demo');
+// Github Pages only reads from a folder named `docs/`
+var DEMO_DIR = path.resolve(__dirname, 'docs');
 var DIST_DIR = path.resolve(__dirname, 'dist');
 var EXAMPLE_DIR = path.resolve(__dirname, 'examples');
 var ROOT_DIR = path.resolve(__dirname);

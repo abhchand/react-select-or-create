@@ -5,7 +5,7 @@
 .gitignore
 .stylelintrc
 .circleci
-demo
+docs
 examples
 LICENSE.md
 meta

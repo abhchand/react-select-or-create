@@ -1,0 +1,59 @@
+<html>
+  <head>
+    <title>Example: react-select-or-create</title>
+    <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+    <meta content="utf-8" http-equiv="encoding">
+    <style>
+      body { font-family: 'Helvetica' }
+      .ribbon {
+        position: absolute;
+        top: 0;
+        right: 0;
+      }
+      .component, .tips {
+        width: 100%;
+        padding: 20px 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+      }
+      .tips {
+        margin-top: 350px;
+      }
+      .keyboard-tips {
+        /*width: 350px;*/
+      }
+      .keyboard-tips li {
+        margin: 7px 0;
+      }
+    </style>
+  <link href="main.css?f9672b4ac2425dccb1fc" rel="stylesheet"></head>
+  <body>
+    <!-- Github Ribbon -->
+    <a href="https://github.com/abhchand/react-select-or-create" target="_blank">
+      <img width="149" height="149" src="https://github.blog/wp-content/uploads/2008/12/forkme_right_green_007200.png?resize=149%2C149" class="ribbon" alt="Fork me on GitHub">
+    </a>
+
+    <div class="component">
+      <h3>Simple Component</h3>
+      <div id='app-simple'></div>
+    </div>
+    <div class="component customized">
+      <h3>Customized Component</h3>
+      <div id='app-customized'></div>
+    </div>
+
+    <div class="tips">
+      Try out some of these keyboard shortcuts!
+      <ul class="keyboard-tips">
+        <li>Use TAB to focus the button</li>
+        <li>Use ENTER to open the menu</li>
+        <li>Use the ↑ and ↓ ARROW KEYS to navigate between items</li>
+        <li>Use ENTER again to select a highlighted item</li>
+        <li>Use TAB again to select the "Create" button and use ENTER to create an item</li>
+        <li>Use ESCAPE to close the menu</li>
+      </ul>
+    </div>
+  <script type="text/javascript" src="index.js?f9672b4ac2425dccb1fc"></script></body>
+</html>
