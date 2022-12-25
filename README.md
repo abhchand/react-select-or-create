@@ -109,6 +109,7 @@ const onCreate = (itemName, prevItems) => {
 * [`onSelect`](#onSelect)
 * [`onCreate`](#onCreate)
 * [`createItemBehaviorOnEmptySearch`](#createItemBehaviorOnEmptySearch)
+* [`enableSearch`](#enableSearch)
 * [`textForOpenMenuButton`](#textForOpenMenuButton)
 * [`textForCloseMenuButton`](#textForCloseMenuButton)
 * [`textForEmptyState`](#textForEmptyState)
@@ -184,6 +185,18 @@ There are 3 possible values:
 In all cases the button will become enabled and clickable once some text is entered into the search field.
 
 If any other value is provided, it will ignore it and fall back on the default value.
+
+### `enableSearch`
+
+Controls whether the search `<input />` is enabled.
+
+**type**: `{Boolean}`
+
+**default**: `true`
+
+If `true` (default), the search `<input />` will be displayed and enabled.
+
+If `false`, no search `<input />` will be displayed. In this case, remember to explicitly set `createItemBehaviorOnEmptySearch={'enabled'}` so that the "create" button will still be enabled even with no search `<input />`.
 
 ### `textForOpenMenuButton`
 

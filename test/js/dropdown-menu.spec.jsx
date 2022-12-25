@@ -52,6 +52,24 @@ describe('<DropdownMenu />', () => {
     });
   });
 
+  describe('enableSearch prop', () => {
+    it('renders the searchInput when true', () => {
+      rendered = renderComponent({
+        enableSearch: true
+      });
+
+      expect(getElementSearchInput()).not.toBeNull();
+    });
+
+    it('does not render the searchInput when false', () => {
+      rendered = renderComponent({
+        enableSearch: false
+      });
+
+      expect(rendered.queryByTestId('search-input')).toBeNull();
+    });
+  });
+
   describe('text value props', () => {
     it('overrides the text values correctly in the child components', () => {
       rendered = renderComponent({
@@ -203,7 +221,8 @@ const renderComponent = (additionalProps = {}) => {
     items: items,
     closeMenu: closeMenu,
     handleSelect: handleSelect,
-    handleCreate: handleCreate
+    handleCreate: handleCreate,
+    enableSearch: true
   };
   const props = { ...fixedProps, ...additionalProps };
 

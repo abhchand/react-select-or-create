@@ -423,6 +423,32 @@ describe('<ReactSelectOrCreate />', () => {
     });
   });
 
+  describe('enableSearch prop', () => {
+    it('renders the searchInput when true', () => {
+      rendered = renderComponent({ enableSearch: true });
+
+      clickOpenMenuButton();
+
+      expect(getElementSearchInput()).not.toBeNull();
+    });
+
+    it('does not render the searchInput when false', () => {
+      rendered = renderComponent({ enableSearch: false });
+
+      clickOpenMenuButton();
+
+      expect(rendered.queryByTestId('search-input')).toBeNull();
+    });
+
+    it('renders the searchInput when no value is specified', () => {
+      rendered = renderComponent();
+
+      clickOpenMenuButton();
+
+      expect(getElementSearchInput()).not.toBeNull();
+    });
+  });
+
   describe('text props', () => {
     it('overrides the default text props when present', () => {
       rendered = renderComponent({

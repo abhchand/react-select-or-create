@@ -15,6 +15,8 @@ class DropdownMenu extends React.Component {
 
     createItemBehaviorOnEmptySearch: PropTypes.string,
 
+    enableSearch: PropTypes.bool.isRequired,
+
     textForEmptyState: PropTypes.string,
     textForNoSearchResults: PropTypes.string,
     textForSearchInputPlaceholder: PropTypes.string,
@@ -73,16 +75,19 @@ class DropdownMenu extends React.Component {
   render() {
     return (
       <div data-testid="dropdown-menu" className="dropdown-menu">
-        <SearchInput
-          items={this.props.items}
-          filteredItems={this.state.filteredItems}
-          currentSelectedItemIndex={this.state.currentSelectedItemIndex}
-          onChange={this.updateSearchResults}
-          onKeyEnter={this.props.handleSelect}
-          onKeyEscape={this.props.closeMenu}
-          onKeyArrowDown={this.incrementSelectedItem}
-          onKeyArrowUp={this.decrementSelectedItem}
-          placeholder={this.props.textForSearchInputPlaceholder} />
+        {
+          this.props.enableSearch &&
+            <SearchInput
+              items={this.props.items}
+              filteredItems={this.state.filteredItems}
+              currentSelectedItemIndex={this.state.currentSelectedItemIndex}
+              onChange={this.updateSearchResults}
+              onKeyEnter={this.props.handleSelect}
+              onKeyEscape={this.props.closeMenu}
+              onKeyArrowDown={this.incrementSelectedItem}
+              onKeyArrowUp={this.decrementSelectedItem}
+              placeholder={this.props.textForSearchInputPlaceholder} />
+        }
 
         <SelectItems
           allItems={this.props.items}
