@@ -11,7 +11,7 @@
     <img src="https://img.shields.io/npm/l/react-select-or-create.svg" alt="license">
   </a>
   <a href="https://github.com/abhchand/react-select-or-create/actions">
-    <img src="https://github.com/abhchand/react-select-or-create/workflows/CI/badge.svg" alt="CI">
+    <img src="https://github.com/abhchand/react-select-or-create/actions/workflows/ci.yml/badge.svg" alt="CI">
   </a>
 </p>
 
