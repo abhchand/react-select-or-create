@@ -10,8 +10,8 @@
   <a href="https://github.com/abhchand/react-select-or-create/blob/master/LICENSE.md">
     <img src="https://img.shields.io/npm/l/react-select-or-create.svg" alt="license">
   </a>
-  <a href="https://circleci.com/gh/abhchand/react-select-or-create">
-    <img src="https://circleci.com/gh/abhchand/react-select-or-create.svg?style=shield&circle-token=:circle-token">
+  <a href="https://github.com/abhchand/react-select-or-create/actions">
+    <img src="https://github.com/abhchand/react-select-or-create/workflows/CI/badge.svg" alt="CI">
   </a>
 </p>
 

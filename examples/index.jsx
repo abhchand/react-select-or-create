@@ -55,18 +55,3 @@ ReactDom.render(
   <ReactSelectOrCreate items={items} />,
   document.getElementById('app-simple'),
 );
-
-ReactDom.render(
-  <ReactSelectOrCreate
-    items={items}
-    onCreate={onCreate}
-    onSelect={onSelect}
-    createItemBehaviorOnEmptySearch="disabled"
-    textForOpenMenuButton="What state do you live in?"
-    textForCloseMenuButton="States of India 🇮🇳"
-    textForEmptyState="Nothing here"
-    textForNoSearchResults="No matches!"
-    textForSearchInputPlaceholder="Start typing.."
-    textForCreateItem={textForCreateItem} />,
-  document.getElementById('app-customized'),
-);
